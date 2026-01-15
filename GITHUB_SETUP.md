@@ -54,18 +54,9 @@ git add .
 git commit -m "Initial commit: 儿童情景游戏"
 ```
 
-### 6. 创建 GitHub 仓库并推送
+### 6. ✅ 已完成：代码已推送到 GitHub
 
-1. 在 GitHub 上创建新仓库
-2. 添加远程仓库：
-   ```bash
-   git remote add origin https://github.com/yourusername/my-child-game.git
-   ```
-3. 推送代码：
-   ```bash
-   git branch -M main
-   git push -u origin main
-   ```
+仓库地址：https://github.com/Ing-la/zoosight-game
 
 ## 📋 上传前检查
 
