@@ -1,0 +1,399 @@
+{
+  "stages": [
+    {
+      "id": "stage-1",
+      "title": "见到老师",
+      "scene": "school-entrance",
+      "background": "scene-1.jpg",
+      "character": "teacher.png",
+      "question": "你看到幼儿园老师走过来，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "主动打招呼说'老师好'",
+          "nextStage": "stage-2",
+          "traits": {
+            "外向": 2,
+            "礼貌": 3,
+            "自信": 1
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "躲在妈妈身后",
+          "nextStage": "stage-3",
+          "traits": {
+            "内向": 2,
+            "谨慎": 2,
+            "害羞": 1
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "装作没看见，继续玩",
+          "nextStage": "stage-4",
+          "traits": {
+            "独立": 1,
+            "专注": 2
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "trigger": "opt-1",
+          "type": "animation",
+          "action": "character-smile"
+        }
+      ]
+    },
+    {
+      "id": "stage-2",
+      "title": "筷子掉了",
+      "scene": "dining-room",
+      "background": "scene-2.jpg",
+      "character": "character.png",
+      "question": "吃饭时，你的筷子掉到地上了，你会怎么办？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "找老师帮忙",
+          "nextStage": "stage-5",
+          "traits": {
+            "求助": 2,
+            "沟通": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "哭起来",
+          "nextStage": "stage-6",
+          "traits": {
+            "情绪化": 2,
+            "依赖": 1
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "用手抓饭吃",
+          "nextStage": "stage-7",
+          "traits": {
+            "独立": 2,
+            "适应": 2,
+            "创新": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "自己捡起来",
+          "nextStage": "stage-8",
+          "traits": {
+            "独立": 3,
+            "自理": 2,
+            "自信": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-3",
+      "title": "玩具被抢",
+      "scene": "playground",
+      "background": "scene-3.jpg",
+      "character": "character.png",
+      "question": "在游乐场，另一个小朋友抢走了你正在玩的玩具，你会怎么办？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "告诉老师",
+          "nextStage": null,
+          "traits": {
+            "求助": 3,
+            "规则意识": 2,
+            "沟通": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "自己抢回来",
+          "nextStage": null,
+          "traits": {
+            "独立": 2,
+            "果断": 2,
+            "竞争": 1
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "哭起来",
+          "nextStage": null,
+          "traits": {
+            "情绪化": 2,
+            "依赖": 2,
+            "敏感": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "找其他玩具玩",
+          "nextStage": null,
+          "traits": {
+            "适应": 3,
+            "乐观": 2,
+            "灵活": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-4",
+      "title": "分享食物",
+      "scene": "snack-time",
+      "background": "scene-4.jpg",
+      "character": "character.png",
+      "question": "你带了好吃的零食，有小朋友想要，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "大方地分享",
+          "nextStage": null,
+          "traits": {
+            "分享": 3,
+            "友善": 2,
+            "社交": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "只给一点点",
+          "nextStage": null,
+          "traits": {
+            "谨慎": 2,
+            "自我保护": 1,
+            "平衡": 2
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "不愿意分享",
+          "nextStage": null,
+          "traits": {
+            "自我": 2,
+            "占有欲": 1,
+            "独立": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "问老师该怎么办",
+          "nextStage": null,
+          "traits": {
+            "求助": 2,
+            "规则意识": 2,
+            "谨慎": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-5",
+      "title": "排队等待",
+      "scene": "playground",
+      "background": "scene-5.jpg",
+      "character": "character.png",
+      "question": "大家都在排队玩滑梯，你等了很久，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "继续耐心等待",
+          "nextStage": null,
+          "traits": {
+            "耐心": 3,
+            "规则意识": 3,
+            "自律": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "插队到前面",
+          "nextStage": null,
+          "traits": {
+            "冲动": 2,
+            "自我": 2,
+            "竞争": 1
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "去找其他游戏玩",
+          "nextStage": null,
+          "traits": {
+            "灵活": 3,
+            "适应": 2,
+            "乐观": 2
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "告诉老师有人插队",
+          "nextStage": null,
+          "traits": {
+            "正义感": 2,
+            "沟通": 2,
+            "规则意识": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-6",
+      "title": "帮助他人",
+      "scene": "classroom",
+      "background": "scene-6.jpg",
+      "character": "character.png",
+      "question": "看到有小朋友摔倒了，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "立刻跑过去扶他起来",
+          "nextStage": null,
+          "traits": {
+            "同理心": 3,
+            "助人": 3,
+            "行动力": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "告诉老师",
+          "nextStage": null,
+          "traits": {
+            "求助": 2,
+            "谨慎": 2,
+            "规则意识": 2
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "继续做自己的事",
+          "nextStage": null,
+          "traits": {
+            "专注": 2,
+            "独立": 1,
+            "自我": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "害怕地躲开",
+          "nextStage": null,
+          "traits": {
+            "谨慎": 2,
+            "敏感": 2,
+            "自我保护": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-7",
+      "title": "完成任务",
+      "scene": "classroom",
+      "background": "scene-7.jpg",
+      "character": "character.png",
+      "question": "老师布置了一个手工任务，你觉得有点难，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "努力尝试完成",
+          "nextStage": null,
+          "traits": {
+            "坚持": 3,
+            "自信": 2,
+            "挑战": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "请老师或同学帮忙",
+          "nextStage": null,
+          "traits": {
+            "求助": 2,
+            "沟通": 2,
+            "合作": 2
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "放弃不做",
+          "nextStage": null,
+          "traits": {
+            "逃避": 2,
+            "缺乏坚持": 1,
+            "自我": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "看看别人怎么做，然后模仿",
+          "nextStage": null,
+          "traits": {
+            "学习": 3,
+            "观察": 2,
+            "适应": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "stage-8",
+      "title": "表达感谢",
+      "scene": "classroom",
+      "background": "scene-8.jpg",
+      "character": "character.png",
+      "question": "有小朋友帮你捡起了掉在地上的东西，你会怎么做？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "大声说'谢谢'",
+          "nextStage": null,
+          "traits": {
+            "礼貌": 3,
+            "表达": 2,
+            "社交": 2
+          }
+        },
+        {
+          "id": "opt-2",
+          "text": "小声说谢谢，有点害羞",
+          "nextStage": null,
+          "traits": {
+            "礼貌": 2,
+            "害羞": 2,
+            "内向": 1
+          }
+        },
+        {
+          "id": "opt-3",
+          "text": "不说话，只是笑一笑",
+          "nextStage": null,
+          "traits": {
+            "内向": 2,
+            "表达困难": 1,
+            "友善": 1
+          }
+        },
+        {
+          "id": "opt-4",
+          "text": "也帮他做一件事",
+          "nextStage": null,
+          "traits": {
+            "回报": 3,
+            "助人": 2,
+            "行动力": 2
+          }
+        }
+      ]
+    }
+  ]
+}
+

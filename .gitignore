@@ -1,0 +1,49 @@
+# 依赖
+node_modules/
+yarn.lock
+
+# 构建输出
+dist/
+out/
+build/
+
+# 环境变量
+.env
+.env.local
+.env.production
+.env.*.local
+
+# 日志
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Electron
+*.asar
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 调试
+.vscode/launch.json

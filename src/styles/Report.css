@@ -1,0 +1,90 @@
+.report-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.report-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease;
+}
+
+.report-title {
+  font-size: 3rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.report-body {
+  margin-bottom: 2rem;
+}
+
+.report-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 5px solid #667eea;
+}
+
+.report-section h2 {
+  font-size: 1.8rem;
+  color: #667eea;
+  margin-bottom: 1rem;
+}
+
+.report-section p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+.restart-button {
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+.restart-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.loading {
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.error-message {
+  color: #ff6b6b;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

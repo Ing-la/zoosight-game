@@ -1,0 +1,342 @@
+{
+  "locations": [
+    {
+      "id": "school",
+      "name": "学校",
+      "icon": "🏫",
+      "description": "在学校里会发生什么有趣的事情呢？",
+      "events": [
+        {
+          "id": "entrance",
+          "name": "进校门",
+          "icon": "🚪",
+          "description": "早上来到学校门口",
+          "interactions": [
+            {
+              "id": "i1",
+              "character": "teacher",
+              "characterName": "老师",
+              "dialogue": "老师：早上好！今天心情怎么样？",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "大声说'老师早上好！我今天很开心！'",
+                  "traits": {
+                    "外向": 3,
+                    "礼貌": 2,
+                    "表达": 2
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-2",
+                  "text": "小声说'早上好'",
+                  "traits": {
+                    "内向": 2,
+                    "礼貌": 1,
+                    "害羞": 1
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-3",
+                  "text": "只是点点头",
+                  "traits": {
+                    "内向": 2,
+                    "谨慎": 1
+                  },
+                  "next": "i2"
+                }
+              ]
+            },
+            {
+              "id": "i2",
+              "character": "teacher",
+              "characterName": "老师",
+              "dialogue": "老师：看到你的好朋友了吗？",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "看到了！我要去找他玩！",
+                  "traits": {
+                    "社交": 3,
+                    "主动": 2,
+                    "外向": 2
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-2",
+                  "text": "还没有看到，我先自己玩一会儿",
+                  "traits": {
+                    "独立": 2,
+                    "耐心": 1
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-3",
+                  "text": "不知道，我有点紧张",
+                  "traits": {
+                    "焦虑": 2,
+                    "敏感": 1
+                  },
+                  "next": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lunch",
+          "name": "午餐时间",
+          "icon": "🍽️",
+          "description": "中午吃饭的时候",
+          "interactions": [
+            {
+              "id": "i1",
+              "character": "classmate",
+              "characterName": "同学",
+              "dialogue": "同学：你的饭看起来很好吃，可以给我一点吗？",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "好的，我们一起吃吧！",
+                  "traits": {
+                    "分享": 3,
+                    "友善": 2,
+                    "社交": 2
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-2",
+                  "text": "只能给你一点点",
+                  "traits": {
+                    "分享": 1,
+                    "谨慎": 2,
+                    "平衡": 1
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-3",
+                  "text": "不行，这是我的",
+                  "traits": {
+                    "自我": 2,
+                    "占有欲": 1
+                  },
+                  "next": "i2"
+                }
+              ]
+            },
+            {
+              "id": "i2",
+              "character": "classmate",
+              "characterName": "同学",
+              "dialogue": "同学：谢谢！明天我也带好吃的给你！",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "太好了！我们互相分享！",
+                  "traits": {
+                    "社交": 3,
+                    "乐观": 2,
+                    "合作": 2
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-2",
+                  "text": "不用客气",
+                  "traits": {
+                    "礼貌": 2,
+                    "谦逊": 1
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-3",
+                  "text": "哦，好的",
+                  "traits": {
+                    "内向": 1,
+                    "简单": 1
+                  },
+                  "next": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "playground",
+      "name": "游乐场",
+      "icon": "🎠",
+      "description": "在游乐场里尽情玩耍",
+      "events": [
+        {
+          "id": "slide",
+          "name": "滑滑梯",
+          "icon": "🛝",
+          "description": "大家一起玩滑滑梯",
+          "interactions": [
+            {
+              "id": "i1",
+              "character": "classmate",
+              "characterName": "小朋友",
+              "dialogue": "小朋友：我们一起排队玩滑滑梯吧！",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "好的！我们排队！",
+                  "traits": {
+                    "规则意识": 3,
+                    "合作": 2,
+                    "社交": 2
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-2",
+                  "text": "我想先玩，让我先",
+                  "traits": {
+                    "自我": 2,
+                    "冲动": 1
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-3",
+                  "text": "我不想玩滑滑梯，我去玩别的",
+                  "traits": {
+                    "独立": 2,
+                    "灵活": 1
+                  },
+                  "next": "i2"
+                }
+              ]
+            },
+            {
+              "id": "i2",
+              "character": "classmate",
+              "characterName": "小朋友",
+              "dialogue": "小朋友：轮到你了！",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "太好了！我来了！",
+                  "traits": {
+                    "兴奋": 2,
+                    "外向": 2
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-2",
+                  "text": "我有点害怕，你先玩吧",
+                  "traits": {
+                    "谨慎": 2,
+                    "胆小": 1
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-3",
+                  "text": "谢谢！",
+                  "traits": {
+                    "礼貌": 2,
+                    "感谢": 1
+                  },
+                  "next": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "swing",
+          "name": "荡秋千",
+          "icon": "🪑",
+          "description": "在秋千上荡来荡去",
+          "interactions": [
+            {
+              "id": "i1",
+              "character": "classmate",
+              "characterName": "小朋友",
+              "dialogue": "小朋友：可以让我玩一会儿秋千吗？",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "好的，我们一起玩！",
+                  "traits": {
+                    "分享": 3,
+                    "友善": 2,
+                    "合作": 2
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-2",
+                  "text": "我再玩一会儿就给你",
+                  "traits": {
+                    "平衡": 2,
+                    "协商": 1
+                  },
+                  "next": "i2"
+                },
+                {
+                  "id": "opt-3",
+                  "text": "不行，我还要玩",
+                  "traits": {
+                    "自我": 2,
+                    "占有欲": 1
+                  },
+                  "next": "i2"
+                }
+              ]
+            },
+            {
+              "id": "i2",
+              "character": "classmate",
+              "characterName": "小朋友",
+              "dialogue": "小朋友：谢谢你！我们一起荡秋千吧！",
+              "options": [
+                {
+                  "id": "opt-1",
+                  "text": "太好了！我们一起玩！",
+                  "traits": {
+                    "社交": 3,
+                    "合作": 2,
+                    "快乐": 2
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-2",
+                  "text": "好的",
+                  "traits": {
+                    "简单": 1,
+                    "配合": 1
+                  },
+                  "next": null
+                },
+                {
+                  "id": "opt-3",
+                  "text": "我有点累了，先休息一下",
+                  "traits": {
+                    "自我照顾": 2,
+                    "独立": 1
+                  },
+                  "next": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
