@@ -28,3 +28,4 @@
 4. 在 `scenes-index.js` 中注册新事件
 
 
+

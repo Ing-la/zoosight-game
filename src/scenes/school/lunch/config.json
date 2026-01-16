@@ -11,10 +11,12 @@
       "character": "classmate",
       "characterName": "同学",
       "dialogue": "同学：你的饭看起来很好吃，可以给我一点吗？",
+      "dialogueEn": "Classmate: Your food looks delicious, can you give me some?",
       "options": [
         {
           "id": "opt-1",
           "text": "好的，我们一起吃吧！",
+          "textEn": "Sure, let's eat together!",
           "traits": {
             "分享": 3,
             "友善": 2,
@@ -25,6 +27,7 @@
         {
           "id": "opt-2",
           "text": "只能给你一点点",
+          "textEn": "I can only give you a little bit",
           "traits": {
             "分享": 1,
             "谨慎": 2,
@@ -35,6 +38,7 @@
         {
           "id": "opt-3",
           "text": "不行，这是我的",
+          "textEn": "No, this is mine",
           "traits": {
             "自我": 2,
             "占有欲": 1
@@ -48,10 +52,12 @@
       "character": "classmate",
       "characterName": "同学",
       "dialogue": "同学：谢谢！明天我也带好吃的给你！",
+      "dialogueEn": "Classmate: Thank you! I'll bring you something delicious tomorrow too!",
       "options": [
         {
           "id": "opt-1",
           "text": "太好了！我们互相分享！",
+          "textEn": "Great! Let's share with each other!",
           "traits": {
             "社交": 3,
             "乐观": 2,
@@ -62,6 +68,7 @@
         {
           "id": "opt-2",
           "text": "不用客气",
+          "textEn": "You're welcome",
           "traits": {
             "礼貌": 2,
             "谦逊": 1
@@ -71,6 +78,7 @@
         {
           "id": "opt-3",
           "text": "哦，好的",
+          "textEn": "Oh, okay",
           "traits": {
             "内向": 1,
             "简单": 1
@@ -81,5 +89,6 @@
     }
   ]
 }
+
 
 

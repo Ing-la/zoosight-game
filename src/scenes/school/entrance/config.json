@@ -11,10 +11,12 @@
       "character": "teacher",
       "characterName": "老师",
       "dialogue": "老师：早上好！今天心情怎么样？",
+      "dialogueEn": "Teacher: Good morning! How are you feeling today?",
       "options": [
         {
           "id": "opt-1",
           "text": "大声说'老师早上好！我今天很开心！'",
+          "textEn": "Say loudly 'Good morning teacher! I'm very happy today!'",
           "traits": {
             "外向": 3,
             "礼貌": 2,
@@ -25,6 +27,7 @@
         {
           "id": "opt-2",
           "text": "小声说'早上好'",
+          "textEn": "Say quietly 'Good morning'",
           "traits": {
             "内向": 2,
             "礼貌": 1,
@@ -35,6 +38,7 @@
         {
           "id": "opt-3",
           "text": "只是点点头",
+          "textEn": "Just nod",
           "traits": {
             "内向": 2,
             "谨慎": 1
@@ -48,10 +52,12 @@
       "character": "teacher",
       "characterName": "老师",
       "dialogue": "老师：看到你的好朋友了吗？",
+      "dialogueEn": "Teacher: Have you seen your good friend?",
       "options": [
         {
           "id": "opt-1",
           "text": "看到了！我要去找他玩！",
+          "textEn": "Yes! I'm going to play with him!",
           "traits": {
             "社交": 3,
             "主动": 2,
@@ -62,6 +68,7 @@
         {
           "id": "opt-2",
           "text": "还没有看到，我先自己玩一会儿",
+          "textEn": "Not yet, I'll play by myself for a while",
           "traits": {
             "独立": 2,
             "耐心": 1
@@ -71,6 +78,7 @@
         {
           "id": "opt-3",
           "text": "不知道，我有点紧张",
+          "textEn": "I don't know, I'm a little nervous",
           "traits": {
             "焦虑": 2,
             "敏感": 1
@@ -81,5 +89,6 @@
     }
   ]
 }
+
 
 

@@ -23,3 +23,4 @@ const bgm = sceneLoader.getAssetPath('school', 'lunch', 'sounds/bgm.mp3');
 ```
 
 
+

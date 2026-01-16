@@ -5,9 +5,13 @@ import sceneLoader from '../core/SceneLoader';
 // 动态导入所有场景图片
 const sceneImages = import.meta.glob('../../scenes/**/assets/images/*.png', { eager: true });
 
+// 动态导入所有角色头像图片
+const characterAvatars = import.meta.glob('../../scenes/**/assets/images/*头像.png', { eager: true });
+
 function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId, eventId }) {
   const [imageError, setImageError] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
+  const [avatarError, setAvatarError] = useState({});
   
   useEffect(() => {
     if (locationId && eventId) {
@@ -41,15 +45,41 @@ function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId
     return <div className="loading">加载中...</div>;
   }
 
-  const getCharacterIcon = (character) => {
+  // 获取角色头像图片路径
+  const getCharacterAvatar = (character) => {
+    if (!locationId || !eventId) return null;
+    
+    let avatarFileName = '';
     switch (character) {
       case 'teacher':
-        return '👩‍🏫';
+        avatarFileName = '长颈鹿老师头像.png';
+        break;
       case 'classmate':
-        return '👦';
+        avatarFileName = '狐狸同学头像.png';
+        break;
+      case 'guard':
+        avatarFileName = '大象保安头像.png';
+        break;
       default:
-        return '👤';
+        return null;
     }
+    
+    // 查找匹配的头像图片
+    const searchPath = `${locationId}/${eventId}/assets/images/${avatarFileName}`;
+    const avatarKey = Object.keys(characterAvatars).find(key => 
+      key.includes(searchPath.replace(/\\/g, '/'))
+    );
+    
+    if (avatarKey && characterAvatars[avatarKey]) {
+      const avatarModule = characterAvatars[avatarKey];
+      return avatarModule.default || avatarModule;
+    }
+    
+    return null;
+  };
+
+  const handleAvatarError = (character) => {
+    setAvatarError(prev => ({ ...prev, [character]: true }));
   };
 
   const handleOptionClick = (option) => {
@@ -106,11 +136,37 @@ function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId
               {/* 角色对话 */}
               <div className="dialogue-scene-dialogue">
                 <div className="character-avatar">
-                  {getCharacterIcon(state.interaction.character)}
+                  {(() => {
+                    const avatarSrc = getCharacterAvatar(state.interaction.character);
+                    const hasError = avatarError[state.interaction.character];
+                    
+                    if (avatarSrc && !hasError) {
+                      return (
+                        <img
+                          src={avatarSrc}
+                          alt={state.interaction.characterName}
+                          className="character-avatar-image"
+                          onError={() => handleAvatarError(state.interaction.character)}
+                        />
+                      );
+                    } else {
+                      // 如果图片加载失败，显示默认 emoji
+                      const defaultIcon = state.interaction.character === 'teacher' ? '👩‍🏫' 
+                        : state.interaction.character === 'classmate' ? '👦'
+                        : state.interaction.character === 'guard' ? '🦁'
+                        : '👤';
+                      return <span className="character-avatar-fallback">{defaultIcon}</span>;
+                    }
+                  })()}
                 </div>
                 <div className="dialogue-bubble">
                   <div className="character-name">{state.interaction.characterName}</div>
-                  <div className="dialogue-text">{state.interaction.dialogue}</div>
+                  <div className="dialogue-text">
+                    <div className="dialogue-text-chinese">{state.interaction.dialogue}</div>
+                    {state.interaction.dialogueEn && (
+                      <div className="dialogue-text-english">{state.interaction.dialogueEn}</div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -122,7 +178,10 @@ function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId
                     className="dialogue-option-button"
                     onClick={() => handleOptionClick(option)}
                   >
-                    {option.text}
+                    <div className="option-text-chinese">{option.text}</div>
+                    {option.textEn && (
+                      <div className="option-text-english">{option.textEn}</div>
+                    )}
                   </button>
                 ))}
               </div>
