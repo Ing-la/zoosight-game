@@ -1,0 +1,84 @@
+{
+  "id": "swing",
+  "name": "荡秋千",
+  "icon": "🪑",
+  "description": "在秋千上荡来荡去",
+  "locationId": "playground",
+  "eventId": "swing",
+  "interactions": [
+    {
+      "id": "i1",
+      "character": "classmate",
+      "characterName": "小朋友",
+      "dialogue": "小朋友：可以让我玩一会儿秋千吗？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "好的，我们一起玩！",
+          "traits": {
+            "分享": 3,
+            "友善": 2,
+            "合作": 2
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-2",
+          "text": "我再玩一会儿就给你",
+          "traits": {
+            "平衡": 2,
+            "协商": 1
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-3",
+          "text": "不行，我还要玩",
+          "traits": {
+            "自我": 2,
+            "占有欲": 1
+          },
+          "next": "i2"
+        }
+      ]
+    },
+    {
+      "id": "i2",
+      "character": "classmate",
+      "characterName": "小朋友",
+      "dialogue": "小朋友：谢谢你！我们一起荡秋千吧！",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "太好了！我们一起玩！",
+          "traits": {
+            "社交": 3,
+            "合作": 2,
+            "快乐": 2
+          },
+          "next": null
+        },
+        {
+          "id": "opt-2",
+          "text": "好的",
+          "traits": {
+            "简单": 1,
+            "配合": 1
+          },
+          "next": null
+        },
+        {
+          "id": "opt-3",
+          "text": "我有点累了，先休息一下",
+          "traits": {
+            "自我照顾": 2,
+            "独立": 1
+          },
+          "next": null
+        }
+      ]
+    }
+  ]
+}
+
+

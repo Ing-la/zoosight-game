@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCurrentUser, getUserGameData } from '../utils/userStorage';
-import locationsData from '../data/locations.json';
+import sceneRegistry from '../scenes/core/SceneRegistry';
 import '../styles/EventSelect.css';
 
 function EventSelect() {
@@ -16,7 +16,7 @@ function EventSelect() {
     }
   }, [navigate]);
 
-  const location = locationsData.locations.find(loc => loc.id === locationId);
+  const location = sceneRegistry.getLocation(locationId);
 
   if (!location) {
     return <div className="error">场景不存在</div>;

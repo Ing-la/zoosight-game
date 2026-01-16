@@ -1,0 +1,83 @@
+{
+  "id": "slide",
+  "name": "滑滑梯",
+  "icon": "🛝",
+  "description": "大家一起玩滑滑梯",
+  "locationId": "playground",
+  "eventId": "slide",
+  "interactions": [
+    {
+      "id": "i1",
+      "character": "classmate",
+      "characterName": "小朋友",
+      "dialogue": "小朋友：我们一起排队玩滑滑梯吧！",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "好的！我们排队！",
+          "traits": {
+            "规则意识": 3,
+            "合作": 2,
+            "社交": 2
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-2",
+          "text": "我想先玩，让我先",
+          "traits": {
+            "自我": 2,
+            "冲动": 1
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-3",
+          "text": "我不想玩滑滑梯，我去玩别的",
+          "traits": {
+            "独立": 2,
+            "灵活": 1
+          },
+          "next": "i2"
+        }
+      ]
+    },
+    {
+      "id": "i2",
+      "character": "classmate",
+      "characterName": "小朋友",
+      "dialogue": "小朋友：轮到你了！",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "太好了！我来了！",
+          "traits": {
+            "兴奋": 2,
+            "外向": 2
+          },
+          "next": null
+        },
+        {
+          "id": "opt-2",
+          "text": "我有点害怕，你先玩吧",
+          "traits": {
+            "谨慎": 2,
+            "胆小": 1
+          },
+          "next": null
+        },
+        {
+          "id": "opt-3",
+          "text": "谢谢！",
+          "traits": {
+            "礼貌": 2,
+            "感谢": 1
+          },
+          "next": null
+        }
+      ]
+    }
+  ]
+}
+
+

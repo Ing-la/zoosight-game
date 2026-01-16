@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, logout } from '../utils/userStorage';
-import locationsData from '../data/locations.json';
+import sceneRegistry from '../scenes/core/SceneRegistry';
 import '../styles/LocationSelect.css';
 
 function LocationSelect() {
@@ -34,7 +34,7 @@ function LocationSelect() {
         <p className="location-select-subtitle">你想去哪里玩呢？</p>
         
         <div className="locations-grid">
-          {locationsData.locations.map((location) => (
+          {sceneRegistry.getLocations().map((location) => (
             <div
               key={location.id}
               className="location-card"

@@ -57,15 +57,15 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "public/assets/images/icon.ico"
+      "icon": "src/scenes/assets/icons/icon.ico"
     },
     "mac": {
       "target": "dmg",
-      "icon": "public/assets/images/icon.icns"
+      "icon": "src/scenes/assets/icons/icon.icns"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "public/assets/images/icon.png"
+      "icon": "src/scenes/assets/icons/icon.png"
     }
   }
 }

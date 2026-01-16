@@ -52,9 +52,9 @@ npm run build:electron
 ### 图标文件
 
 确保以下图标文件存在：
-- `public/assets/images/icon.png` - Linux 图标
-- `public/assets/images/icon.ico` - Windows 图标
-- `public/assets/images/icon.icns` - macOS 图标
+- `src/scenes/assets/icons/icon.png` - Linux 图标
+- `src/scenes/assets/icons/icon.ico` - Windows 图标
+- `src/scenes/assets/icons/icon.icns` - macOS 图标
 
 如果图标文件不存在，打包过程可能会失败或使用默认图标。
 
@@ -132,4 +132,6 @@ jobs:
 1. 确保已正确构建 React 应用（`dist/` 目录存在）
 2. 检查 `main.js` 中的路径是否正确
 3. 查看 Electron 控制台错误信息
+
+
 

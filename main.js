@@ -17,7 +17,7 @@ function createWindow() {
       enableRemoteModule: false, // 安全：禁用远程模块
       webSecurity: true // 启用 Web 安全
     },
-    icon: path.join(__dirname, 'public/assets/images/icon.png'),
+    icon: path.join(__dirname, 'src/scenes/assets/icons/icon.png'),
     titleBarStyle: 'default',
     backgroundColor: '#f0f0f0'
   });

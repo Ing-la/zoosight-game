@@ -1,0 +1,85 @@
+{
+  "id": "lunch",
+  "name": "午餐时间",
+  "icon": "🍽️",
+  "description": "中午吃饭的时候",
+  "locationId": "school",
+  "eventId": "lunch",
+  "interactions": [
+    {
+      "id": "i1",
+      "character": "classmate",
+      "characterName": "同学",
+      "dialogue": "同学：你的饭看起来很好吃，可以给我一点吗？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "好的，我们一起吃吧！",
+          "traits": {
+            "分享": 3,
+            "友善": 2,
+            "社交": 2
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-2",
+          "text": "只能给你一点点",
+          "traits": {
+            "分享": 1,
+            "谨慎": 2,
+            "平衡": 1
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-3",
+          "text": "不行，这是我的",
+          "traits": {
+            "自我": 2,
+            "占有欲": 1
+          },
+          "next": "i2"
+        }
+      ]
+    },
+    {
+      "id": "i2",
+      "character": "classmate",
+      "characterName": "同学",
+      "dialogue": "同学：谢谢！明天我也带好吃的给你！",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "太好了！我们互相分享！",
+          "traits": {
+            "社交": 3,
+            "乐观": 2,
+            "合作": 2
+          },
+          "next": null
+        },
+        {
+          "id": "opt-2",
+          "text": "不用客气",
+          "traits": {
+            "礼貌": 2,
+            "谦逊": 1
+          },
+          "next": null
+        },
+        {
+          "id": "opt-3",
+          "text": "哦，好的",
+          "traits": {
+            "内向": 1,
+            "简单": 1
+          },
+          "next": null
+        }
+      ]
+    }
+  ]
+}
+
+

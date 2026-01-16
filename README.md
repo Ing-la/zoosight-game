@@ -35,11 +35,6 @@ my-child-game/
 ├── README.md               # 项目说明文档
 ├── LICENSE                 # 许可证
 │
-├── public/                 # 静态资源
-│   └── assets/
-│       ├── images/         # 图片资源
-│       └── sounds/         # 音效资源
-│
 ├── src/                    # 源代码
 │   ├── api/                # API 调用
 │   │   ├── ai.js           # AI 接口封装
@@ -55,15 +50,41 @@ my-child-game/
 │   │   ├── ParentDashboard.jsx # 家长面板
 │   │   └── ...
 │   │
-│   ├── scenes/             # 场景相关
+│   ├── scenes/             # 场景系统（核心）
+│   │   ├── core/           # 核心系统
+│   │   │   ├── SceneLoader.js      # 场景加载器
+│   │   │   ├── SceneRegistry.js    # 场景注册表
+│   │   │   └── README.md           # 接口规范
+│   │   │
+│   │   ├── school/         # 学校场景
+│   │   │   ├── entrance/   # 进校门事件
+│   │   │   │   ├── config.json     # 场景配置
+│   │   │   │   ├── assets/         # 资源目录
+│   │   │   │   │   ├── images/     # 图片资源
+│   │   │   │   │   └── sounds/     # 音效资源
+│   │   │   │   └── README.md
+│   │   │   ├── lunch/      # 午餐时间事件
+│   │   │   │   ├── config.json
+│   │   │   │   ├── assets/
+│   │   │   │   └── README.md
+│   │   │   └── README.md
+│   │   │
+│   │   ├── playground/      # 游乐场场景
+│   │   │   ├── slide/      # 滑滑梯事件
+│   │   │   ├── swing/      # 荡秋千事件
+│   │   │   └── README.md
+│   │   │
+│   │   ├── assets/         # 应用资源
+│   │   │   └── icons/      # 应用图标
+│   │   │
 │   │   ├── handlers/       # 场景处理器
 │   │   │   └── DialogueHandler.js
-│   │   └── types/          # 场景类型组件
-│   │       └── DialogueScene.jsx
-│   │
-│   ├── data/               # 数据文件
-│   │   ├── locations.json  # 场景数据
-│   │   └── stages.json     # 关卡数据（旧版）
+│   │   │
+│   │   ├── types/          # 场景类型组件
+│   │   │   └── DialogueScene.jsx
+│   │   │
+│   │   ├── scenes-index.js # 场景索引文件
+│   │   └── README.md       # 场景系统说明
 │   │
 │   ├── styles/             # 样式文件
 │   │   ├── global.css      # 全局样式
@@ -82,6 +103,23 @@ my-child-game/
 └── dist/                   # 构建输出（不提交到 Git）
 └── out/                    # 打包输出（不提交到 Git）
 ```
+
+## 🎯 场景系统架构
+
+项目采用**模块化场景架构**，每个场景（地点）都有独立的目录，包含：
+- **场景配置** (`config.json`) - 定义场景的对话、选项等
+- **资源文件** (`assets/`) - 场景的图片、音效等资源
+
+### 添加新场景
+
+1. 在 `src/scenes/` 下创建场景目录（如 `school/`）或使用现有场景目录
+2. 在场景目录下创建事件目录（如 `school/new-event/`）
+3. 创建 `config.json` 配置文件
+4. 如需资源，创建 `assets/images/` 和 `assets/sounds/` 目录
+5. 在 `src/scenes/scenes-index.js` 中注册场景
+6. 完成！
+
+详细说明请参考 `src/scenes/README.md`
 
 ## 🚀 快速开始
 
@@ -182,10 +220,11 @@ VITE_GEMINI_API_KEY=your_api_key_here
 3. 查看控制台错误信息
 4. 如果 API Key 无效，可以使用"模拟报告"功能测试
 
-### 图片不显示
+### 场景资源不显示
 
-- 确保 `public/assets/images/` 目录存在
-- 检查图片路径是否正确
+- 确保场景资源文件存在于 `src/scenes/{locationId}/{eventId}/assets/` 目录
+- 检查资源路径是否正确
+- 使用 `sceneLoader.getAssetPath()` 获取正确的资源路径
 
 ## 🤝 贡献
 

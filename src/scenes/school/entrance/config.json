@@ -1,0 +1,85 @@
+{
+  "id": "entrance",
+  "name": "进校门",
+  "icon": "🚪",
+  "description": "早上来到学校门口",
+  "locationId": "school",
+  "eventId": "entrance",
+  "interactions": [
+    {
+      "id": "i1",
+      "character": "teacher",
+      "characterName": "老师",
+      "dialogue": "老师：早上好！今天心情怎么样？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "大声说'老师早上好！我今天很开心！'",
+          "traits": {
+            "外向": 3,
+            "礼貌": 2,
+            "表达": 2
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-2",
+          "text": "小声说'早上好'",
+          "traits": {
+            "内向": 2,
+            "礼貌": 1,
+            "害羞": 1
+          },
+          "next": "i2"
+        },
+        {
+          "id": "opt-3",
+          "text": "只是点点头",
+          "traits": {
+            "内向": 2,
+            "谨慎": 1
+          },
+          "next": "i2"
+        }
+      ]
+    },
+    {
+      "id": "i2",
+      "character": "teacher",
+      "characterName": "老师",
+      "dialogue": "老师：看到你的好朋友了吗？",
+      "options": [
+        {
+          "id": "opt-1",
+          "text": "看到了！我要去找他玩！",
+          "traits": {
+            "社交": 3,
+            "主动": 2,
+            "外向": 2
+          },
+          "next": null
+        },
+        {
+          "id": "opt-2",
+          "text": "还没有看到，我先自己玩一会儿",
+          "traits": {
+            "独立": 2,
+            "耐心": 1
+          },
+          "next": null
+        },
+        {
+          "id": "opt-3",
+          "text": "不知道，我有点紧张",
+          "traits": {
+            "焦虑": 2,
+            "敏感": 1
+          },
+          "next": null
+        }
+      ]
+    }
+  ]
+}
+
+

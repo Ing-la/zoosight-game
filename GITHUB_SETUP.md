@@ -42,9 +42,9 @@
 ### 4. 检查图标文件
 
 确保以下图标文件存在（如果不存在，打包时可能会失败）：
-- `public/assets/images/icon.png`
-- `public/assets/images/icon.ico`
-- `public/assets/images/icon.icns`
+- `src/scenes/assets/icons/icon.png`
+- `src/scenes/assets/icons/icon.ico`
+- `src/scenes/assets/icons/icon.icns`
 
 ### 5. 初始化 Git 仓库（如果还没有）
 

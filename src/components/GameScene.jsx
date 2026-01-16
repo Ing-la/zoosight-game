@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import locationsData from '../data/locations.json';
 import { getCurrentUser, saveUserGameData } from '../utils/userStorage';
 import DialogueScene from '../scenes/types/DialogueScene';
 import { DialogueHandler } from '../scenes/handlers/DialogueHandler';
+import sceneLoader from '../scenes/core/SceneLoader';
 import '../styles/GameScene.css';
 
 function GameScene() {
   const { locationId, eventId } = useParams();
   const navigate = useNavigate();
   const [handler, setHandler] = useState(null);
-
-  const location = locationsData.locations.find(loc => loc.id === locationId);
-  const event = location?.events.find(evt => evt.id === eventId);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleComplete = useCallback((choices) => {
     // 保存场景数据
@@ -46,16 +45,40 @@ function GameScene() {
       return;
     }
 
-    if (!location || !event) {
-      navigate('/location-select');
-      return;
-    }
+    // 加载场景配置
+    try {
+      const sceneConfig = sceneLoader.loadSceneByLocationAndEvent(locationId, eventId);
+      
+      if (!sceneConfig) {
+        setError('场景不存在');
+        navigate('/location-select');
+        return;
+      }
 
-    // 创建对话处理器
-    const sceneHandler = new DialogueHandler(event);
-    sceneHandler.init();
-    setHandler(sceneHandler);
-  }, [locationId, eventId, navigate, location, event]);
+      // 创建对话处理器（使用场景配置中的 interactions）
+      const eventData = {
+        id: sceneConfig.eventId,
+        interactions: sceneConfig.interactions
+      };
+      
+      const sceneHandler = new DialogueHandler(eventData);
+      sceneHandler.init();
+      setHandler(sceneHandler);
+      setLoading(false);
+    } catch (err) {
+      console.error('加载场景失败:', err);
+      setError(err.message);
+      navigate('/location-select');
+    }
+  }, [locationId, eventId, navigate]);
+
+  if (loading) {
+    return <div className="loading">加载中...</div>;
+  }
+
+  if (error) {
+    return <div className="error">错误: {error}</div>;
+  }
 
   if (!handler) {
     return <div className="loading">加载中...</div>;
