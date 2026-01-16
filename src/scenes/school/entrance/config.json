@@ -9,8 +9,14 @@
     {
       "id": "i0",
       "type": "narrative",
-      "description": "阳光洒在校门前，长颈鹿老师正在扫地。",
-      "descriptionEn": "Sunshine spills over the school gate, and the giraffe teacher is sweeping the floor.",
+      "description": [
+        "清晨的阳光洒在学校门口，空气里带着淡淡的青草香。",
+        "长颈鹿老师正弯着身子，用扫帚轻轻扫着落叶，远处传来学生们的笑声。"
+      ],
+      "descriptionEn": [
+        "The morning sun shines on the school gate, and the air carries a faint scent of grass.",
+        "The giraffe teacher is bending down, gently sweeping fallen leaves with a broom, and laughter from students can be heard in the distance."
+      ],
       "next": "i1"
     },
     {
@@ -41,7 +47,7 @@
             "礼貌": 2,
             "友善": 2
           },
-          "next": "i2"
+          "next": "i1c"
         },
         {
           "id": "opt-3",
@@ -52,7 +58,7 @@
             "害羞": 2,
             "谨慎": 1
           },
-          "next": "i2"
+          "next": "i1d"
         }
       ]
     },
@@ -86,47 +92,158 @@
         "Her voice gently echoes in the sunlight: \"Let's go in together.\"",
         "You smile and reply: \"Okay!\""
       ],
-      "next": "i2"
+      "next": "i1e"
     },
     {
-      "id": "i2",
-      "character": "teacher",
-      "characterName": "老师",
-      "dialogue": "老师：看到你的好朋友了吗？",
-      "dialogueEn": "Teacher: Have you seen your good friend?",
+      "id": "i1e",
+      "type": "narrative",
+      "image": "meet_security.png",
+      "description": [
+        "你和老师走进校园，前方站着一位高大的大象保安。",
+        "他手里拿着一支体温枪，正微笑着迎接每一位同学。",
+        "你抬头看向老师，心里有一点好奇。"
+      ],
+      "descriptionEn": [
+        "You and the teacher walk into the campus, and ahead stands a tall elephant security guard.",
+        "He holds a temperature gun in his hand, smiling and greeting each student.",
+        "You look up at the teacher, feeling a bit curious."
+      ],
+      "next": "i1f"
+    },
+    {
+      "id": "i1f",
+      "character": "guard",
+      "characterName": "大象保安",
+      "dialogue": "大象保安：早上好，小家伙！该测体温啦！",
+      "dialogueEn": "Security Guard: Good morning, little one! Time to check your temperature!",
+      "image": "prepare_temperature.png",
       "options": [
         {
           "id": "opt-1",
-          "text": "看到了！我要去找他玩！",
-          "textEn": "Yes! I'm going to play with him!",
+          "text": "主动伸出额头：「我准备好了！」",
+          "textEn": "Actively extend your forehead: \"I'm ready!\"",
           "traits": {
-            "社交": 3,
-            "主动": 2,
-            "外向": 2
+            "主动": 3,
+            "勇敢": 2,
+            "配合": 2
           },
-          "next": null
+          "next": "i1g"
         },
         {
           "id": "opt-2",
-          "text": "还没有看到，我先自己玩一会儿",
-          "textEn": "Not yet, I'll play by myself for a while",
+          "text": "好奇地问：「这个会不会凉呀？」",
+          "textEn": "Ask curiously: \"Will this be cold?\"",
           "traits": {
-            "独立": 2,
-            "耐心": 1
+            "好奇": 3,
+            "表达": 2,
+            "思考": 1
           },
-          "next": null
+          "next": "i1i"
         },
         {
           "id": "opt-3",
-          "text": "不知道，我有点紧张",
-          "textEn": "I don't know, I'm a little nervous",
+          "text": "往后退半步，有点犹豫",
+          "textEn": "Step back half a step, feeling a bit hesitant",
           "traits": {
-            "焦虑": 2,
-            "敏感": 1
+            "谨慎": 2,
+            "紧张": 2,
+            "害羞": 1
           },
-          "next": null
+          "next": "i1j"
         }
       ]
+    },
+    {
+      "id": "i1g",
+      "type": "narrative",
+      "image": "extend_forehead.png",
+      "description": [
+        "你立刻踮起脚，主动把额头伸向保安叔叔。",
+        "他有些惊喜地笑了，说：「哇，好勇敢！你已经准备好了呀！」",
+        "你大声回答：「我准备好了!」"
+      ],
+      "descriptionEn": [
+        "You immediately stand on tiptoe and actively extend your forehead toward the security guard.",
+        "He smiles with surprise and says: \"Wow, so brave! You're already ready!\"",
+        "You answer loudly: \"I'm ready!\""
+      ],
+      "next": "i1h"
+    },
+    {
+      "id": "i1i",
+      "type": "narrative",
+      "image": "ask_if_cold.png",
+      "description": [
+        "你抬头看着保安叔叔手里的体温枪，眼睛里闪着好奇，问：「这个会不会凉呀？」",
+        "保安笑着摇摇头，说：「不会的，很温和，一点也不凉。」"
+      ],
+      "descriptionEn": [
+        "You look up at the temperature gun in the security guard's hand, your eyes sparkling with curiosity, and ask: \"Will this be cold?\"",
+        "The security guard smiles and shakes his head, saying: \"No, it's very gentle, not cold at all.\""
+      ],
+      "next": "i1h"
+    },
+    {
+      "id": "i1j",
+      "type": "narrative",
+      "image": "step_back.png",
+      "description": [
+        "你下意识地往后退了一小步，手抓紧了背包带。",
+        "保安叔叔和老师蹲下身，笑着对你说：「别担心，小家伙，只是'滴'的一声而已。」「看吧，很安全的。」"
+      ],
+      "descriptionEn": [
+        "You instinctively take a small step back, gripping your backpack strap tightly.",
+        "The security guard and teacher squat down and say with a smile: \"Don't worry, little one, it's just a 'beep' sound.\" \"See, it's very safe.\""
+      ],
+      "next": "i1h"
+    },
+    {
+      "id": "i1h",
+      "type": "narrative",
+      "image": "complete_temperature.png",
+      "description": [
+        "测完体温后，你和老师一起向教学楼走去。",
+        "身后的保安叔叔向你挥手告别。",
+        "阳光洒在走廊上，新的校园一天正式开始。"
+      ],
+      "descriptionEn": [
+        "After checking your temperature, you and the teacher walk toward the teaching building together.",
+        "The security guard behind you waves goodbye.",
+        "Sunlight shines on the corridor, and a new school day officially begins."
+      ],
+      "next": null
+    },
+    {
+      "id": "i1c",
+      "type": "narrative",
+      "image": "smile_wave.png",
+      "description": [
+        "你轻轻挥手，对老师露出笑容。",
+        "老师也笑着回礼，说道：「早上好！你的笑容真漂亮。」",
+        "阳光落在你的脸上，笑容让空气都变得柔软。"
+      ],
+      "descriptionEn": [
+        "You gently wave your hand and smile at the teacher.",
+        "The teacher also smiles back and says: \"Good morning! Your smile is so beautiful.\"",
+        "Sunlight falls on your face, and your smile makes the air feel soft and warm."
+      ],
+      "next": "i1b"
+    },
+    {
+      "id": "i1d",
+      "type": "narrative",
+      "image": "shy_nod.png",
+      "description": [
+        "你低下头，轻轻点了点头。",
+        "老师弯下身微笑着问：「早上好呀，今天是不是有点害羞？」",
+        "你抬头看到老师温暖的笑容，心里慢慢变得放松。"
+      ],
+      "descriptionEn": [
+        "You lower your head and nod gently.",
+        "The teacher bends down with a smile and asks: \"Good morning! Are you feeling a bit shy today?\"",
+        "You look up and see the teacher's warm smile, and your heart gradually relaxes."
+      ],
+      "next": "i1b"
     }
   ]
 }
