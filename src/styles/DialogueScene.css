@@ -18,7 +18,7 @@
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1400px;
   width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -55,10 +55,69 @@
   font-weight: 500;
 }
 
+.dialogue-scene-main-content {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: flex-start;
+}
+
+.dialogue-scene-image-container {
+  flex: 1;
+  min-width: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialogue-scene-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  max-height: 70vh;
+}
+
+.dialogue-scene-image-placeholder {
+  width: 100%;
+  min-height: 400px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  border: 2px dashed #667eea;
+  border-radius: 15px;
+}
+
+.dialogue-scene-right-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.placeholder-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
 .dialogue-scene-dialogue {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: 2rem;
   align-items: flex-start;
 }
 
@@ -151,6 +210,49 @@
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .dialogue-scene-main-content {
+    flex-direction: column;
+  }
+  
+  .dialogue-scene-image-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .dialogue-scene-right-panel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dialogue-scene-content {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+  
+  .dialogue-scene-main-content {
+    margin-top: 2rem;
+    gap: 1.5rem;
+  }
+  
+  .dialogue-scene-image {
+    max-height: 50vh;
   }
 }
 

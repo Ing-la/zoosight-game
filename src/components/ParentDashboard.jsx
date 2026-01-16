@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllUsersList, logout, getCurrentUser } from '../utils/userStorage';
+import { getAllUsersList, logout, getCurrentUser, deleteUser, deleteCurrentUser } from '../utils/userStorage';
 import { generateReport } from '../api/ai';
+import { getApiConfig } from '../utils/storage';
 import ConfigModal from './ConfigModal';
 import '../styles/ParentDashboard.css';
 
@@ -11,8 +12,12 @@ function ParentDashboard() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingModel, setLoadingModel] = useState(null);
   const [error, setError] = useState(null);
   const [showConfig, setShowConfig] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteTargetUser, setDeleteTargetUser] = useState(null);
+  const [showDeleteParentConfirm, setShowDeleteParentConfirm] = useState(false);
 
   useEffect(() => {
     // 检查登录状态
@@ -35,6 +40,26 @@ function ParentDashboard() {
     setError(null);
     setReport(null);
     setSelectedUser(nickname);
+
+    // 获取当前使用的模型名称
+    const config = getApiConfig();
+    let modelName = '模拟数据';
+    if (config && config.apiKey) {
+      switch (config.model) {
+        case 'gemini':
+          modelName = 'Google Gemini';
+          break;
+        case 'zhipu':
+          modelName = '智谱 AI (GLM)';
+          break;
+        case 'tongyi':
+          modelName = '通义千问 (Qwen)';
+          break;
+        default:
+          modelName = 'AI 模型';
+      }
+    }
+    setLoadingModel(modelName);
 
     try {
       // 获取用户的所有游戏数据
@@ -78,12 +103,45 @@ function ParentDashboard() {
       setError('报告生成失败：' + (err.message || '未知错误'));
     } finally {
       setLoading(false);
+      setLoadingModel(null);
     }
   };
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const handleDeleteUser = (nickname) => {
+    setDeleteTargetUser(nickname);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDeleteUser = () => {
+    if (deleteTargetUser) {
+      const success = deleteUser(deleteTargetUser);
+      if (success) {
+        loadUsers(); // 重新加载用户列表
+        if (selectedUser === deleteTargetUser) {
+          setSelectedUser(null);
+          setReport(null);
+        }
+      }
+      setShowDeleteConfirm(false);
+      setDeleteTargetUser(null);
+    }
+  };
+
+  const handleDeleteParentAccount = () => {
+    setShowDeleteParentConfirm(true);
+  };
+
+  const confirmDeleteParentAccount = () => {
+    const success = deleteCurrentUser();
+    if (success) {
+      navigate('/');
+    }
+    setShowDeleteParentConfirm(false);
   };
 
   return (
@@ -94,6 +152,9 @@ function ParentDashboard() {
           <div className="parent-dashboard-header-buttons">
             <button className="parent-config-button" onClick={() => setShowConfig(true)}>
               ⚙️ API 配置
+            </button>
+            <button className="parent-delete-button" onClick={handleDeleteParentAccount}>
+              注销账号
             </button>
             <button className="parent-logout-button" onClick={handleLogout}>
               退出登录
@@ -118,13 +179,24 @@ function ParentDashboard() {
                       )}
                       <p>已完成场景：{Object.keys(user.gameData || {}).length} 个</p>
                     </div>
-                    <button
-                      className="generate-report-button"
-                      onClick={() => handleGenerateReport(user.nickname)}
-                      disabled={loading}
-                    >
-                      {loading && selectedUser === user.nickname ? '生成中...' : '生成报告'}
-                    </button>
+                    <div className="user-card-buttons">
+                      <button
+                        className="generate-report-button"
+                        onClick={() => handleGenerateReport(user.nickname)}
+                        disabled={loading}
+                      >
+                        {loading && selectedUser === user.nickname 
+                          ? (loadingModel ? `正在调用 ${loadingModel} 分析...` : '生成中...')
+                          : '生成报告'}
+                      </button>
+                      <button
+                        className="delete-user-button"
+                        onClick={() => handleDeleteUser(user.nickname)}
+                        title="删除账号"
+                      >
+                        删除
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -157,6 +229,54 @@ function ParentDashboard() {
         </div>
       </div>
       <ConfigModal isOpen={showConfig} onClose={() => setShowConfig(false)} />
+      
+      {/* 删除用户确认对话框 */}
+      {showDeleteConfirm && (
+        <div className="delete-confirm-modal-overlay" onClick={() => setShowDeleteConfirm(false)}>
+          <div className="delete-confirm-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="delete-confirm-modal-header">
+              <h2>⚠️ 确认删除账号</h2>
+              <button className="delete-confirm-modal-close" onClick={() => setShowDeleteConfirm(false)}>×</button>
+            </div>
+            <div className="delete-confirm-modal-body">
+              <p>确定要删除账号 <strong>"{deleteTargetUser}"</strong> 吗？</p>
+              <p className="delete-warning">此操作将删除该账号的所有游戏数据，且不可恢复！</p>
+            </div>
+            <div className="delete-confirm-modal-footer">
+              <button className="delete-confirm-button delete-confirm-cancel" onClick={() => setShowDeleteConfirm(false)}>
+                取消
+              </button>
+              <button className="delete-confirm-button delete-confirm-yes" onClick={confirmDeleteUser}>
+                确认删除
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 删除家长账号确认对话框 */}
+      {showDeleteParentConfirm && (
+        <div className="delete-confirm-modal-overlay" onClick={() => setShowDeleteParentConfirm(false)}>
+          <div className="delete-confirm-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="delete-confirm-modal-header">
+              <h2>⚠️ 确认注销账号</h2>
+              <button className="delete-confirm-modal-close" onClick={() => setShowDeleteParentConfirm(false)}>×</button>
+            </div>
+            <div className="delete-confirm-modal-body">
+              <p>确定要注销当前家长账号吗？</p>
+              <p className="delete-warning">此操作将删除您的账号和所有数据，且不可恢复！</p>
+            </div>
+            <div className="delete-confirm-modal-footer">
+              <button className="delete-confirm-button delete-confirm-cancel" onClick={() => setShowDeleteParentConfirm(false)}>
+                取消
+              </button>
+              <button className="delete-confirm-button delete-confirm-yes" onClick={confirmDeleteParentAccount}>
+                确认注销
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

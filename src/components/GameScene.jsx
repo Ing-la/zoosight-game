@@ -87,6 +87,8 @@ function GameScene() {
   return (
     <DialogueScene
       handler={handler}
+      locationId={locationId}
+      eventId={eventId}
       onOptionSelect={handleOptionSelect}
       onComplete={handleComplete}
       onBack={handleBack}

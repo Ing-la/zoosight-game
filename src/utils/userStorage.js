@@ -219,3 +219,41 @@ export function createParentAccount(nickname, password) {
 
   return saveAllUsers(users);
 }
+
+/**
+ * 删除用户账号
+ * @param {string} nickname - 要删除的用户昵称
+ * @returns {boolean} 是否删除成功
+ */
+export function deleteUser(nickname) {
+  const users = getAllUsers();
+  
+  if (!users[nickname]) {
+    return false;
+  }
+
+  // 删除用户
+  delete users[nickname];
+  
+  // 如果删除的是当前登录用户，同时清除登录状态
+  const currentUser = getCurrentUser();
+  if (currentUser && currentUser.nickname === nickname) {
+    logout();
+  }
+
+  return saveAllUsers(users);
+}
+
+/**
+ * 注销当前登录的账号
+ * @returns {boolean} 是否注销成功
+ */
+export function deleteCurrentUser() {
+  const currentUser = getCurrentUser();
+  
+  if (!currentUser) {
+    return false;
+  }
+
+  return deleteUser(currentUser.nickname);
+}
