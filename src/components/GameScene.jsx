@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCurrentUser, saveUserGameData } from '../utils/userStorage';
 import DialogueScene from '../scenes/types/DialogueScene';
+import NarrativeScene from '../scenes/types/NarrativeScene';
 import { DialogueHandler } from '../scenes/handlers/DialogueHandler';
 import sceneLoader from '../scenes/core/SceneLoader';
 import '../styles/GameScene.css';
@@ -29,6 +30,15 @@ function GameScene() {
   }, [locationId, navigate]);
 
   const handleOptionSelect = useCallback(() => {
+    // 强制重新渲染 - 通过更新 handler 引用
+    if (handler) {
+      const newHandler = Object.create(Object.getPrototypeOf(handler));
+      Object.assign(newHandler, handler);
+      setHandler(newHandler);
+    }
+  }, [handler]);
+
+  const handleContinue = useCallback(() => {
     // 强制重新渲染 - 通过更新 handler 引用
     if (handler) {
       const newHandler = Object.create(Object.getPrototypeOf(handler));
@@ -84,6 +94,30 @@ function GameScene() {
     return <div className="loading">加载中...</div>;
   }
 
+  // 根据当前交互类型选择渲染的组件
+  const state = handler.getCurrentState();
+  const interactionType = state?.type || 'dialogue';
+
+  // 如果场景已完成，跳转到完成页面
+  if (handler.isComplete()) {
+    handleComplete(handler.getChoices());
+    return <div className="loading">加载中...</div>;
+  }
+
+  // 根据类型渲染不同的场景组件
+  if (interactionType === 'narrative') {
+    return (
+      <NarrativeScene
+        handler={handler}
+        locationId={locationId}
+        eventId={eventId}
+        onContinue={handleContinue}
+        onBack={handleBack}
+      />
+    );
+  }
+
+  // 默认渲染对话场景
   return (
     <DialogueScene
       handler={handler}

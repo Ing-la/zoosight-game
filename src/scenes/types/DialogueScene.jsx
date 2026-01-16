@@ -15,8 +15,12 @@ function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId
   
   useEffect(() => {
     if (locationId && eventId) {
-      // 查找匹配的图片路径
-      const searchPath = `${locationId}/${eventId}/assets/images/Gemini_Generated_Image_zgr5x7zgr5x7zgr5.png`;
+      const state = handler?.getCurrentState();
+      const interaction = state?.interaction;
+      
+      // 优先使用 interaction 中指定的图片，否则使用默认图片
+      const imageFileName = interaction?.image || 'Gemini_Generated_Image_zgr5x7zgr5x7zgr5.png';
+      const searchPath = `${locationId}/${eventId}/assets/images/${imageFileName}`;
       
       // 查找匹配的图片
       const imageModuleKey = Object.keys(sceneImages).find(key => 
@@ -33,7 +37,7 @@ function DialogueScene({ handler, onOptionSelect, onComplete, onBack, locationId
         setImageError(true);
       }
     }
-  }, [locationId, eventId]);
+  }, [locationId, eventId, handler]);
   
   if (!handler) {
     return <div className="loading">加载中...</div>;

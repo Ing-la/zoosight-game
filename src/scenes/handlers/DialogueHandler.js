@@ -18,6 +18,26 @@ export class DialogueHandler {
     }
   }
 
+  /**
+   * 处理描述性节点的继续操作
+   */
+  handleContinue() {
+    if (!this.currentInteraction) return;
+
+    // 检查是否有下一个交互
+    if (this.currentInteraction.next && this.currentInteraction.next !== null) {
+      const nextInteraction = this.eventData.interactions.find(i => i.id === this.currentInteraction.next);
+      if (nextInteraction) {
+        this.currentInteraction = nextInteraction;
+        this.currentInteractionIndex = this.eventData.interactions.indexOf(nextInteraction);
+      } else {
+        this.currentInteraction = null;
+      }
+    } else {
+      this.currentInteraction = null;
+    }
+  }
+
   handleInteraction(interactionId, optionId) {
     if (!this.currentInteraction) return;
 
@@ -47,8 +67,20 @@ export class DialogueHandler {
   }
 
   getCurrentState() {
+    if (!this.currentInteraction) {
+      return {
+        type: null,
+        interaction: null,
+        interactionIndex: this.currentInteractionIndex,
+        totalInteractions: this.eventData.interactions?.length || 0
+      };
+    }
+
+    // 根据 interaction 的 type 字段判断类型，默认为 'dialogue'
+    const interactionType = this.currentInteraction.type || 'dialogue';
+    
     return {
-      type: 'dialogue',
+      type: interactionType,
       interaction: this.currentInteraction,
       interactionIndex: this.currentInteractionIndex,
       totalInteractions: this.eventData.interactions?.length || 0

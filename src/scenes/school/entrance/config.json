@@ -7,45 +7,86 @@
   "eventId": "entrance",
   "interactions": [
     {
+      "id": "i0",
+      "type": "narrative",
+      "description": "阳光洒在校门前，长颈鹿老师正在扫地。",
+      "descriptionEn": "Sunshine spills over the school gate, and the giraffe teacher is sweeping the floor.",
+      "next": "i1"
+    },
+    {
       "id": "i1",
       "character": "teacher",
       "characterName": "老师",
-      "dialogue": "老师：早上好！今天心情怎么样？",
-      "dialogueEn": "Teacher: Good morning! How are you feeling today?",
+      "dialogue": "老师：早上好呀，小同学～今天看起来精神不错呀！",
+      "dialogueEn": "Teacher: Good morning, little student! You look energetic today!",
+      "image": "teacher_greeting.png",
       "options": [
         {
           "id": "opt-1",
-          "text": "大声说'老师早上好！我今天很开心！'",
-          "textEn": "Say loudly 'Good morning teacher! I'm very happy today!'",
+          "text": "大声说：「老师早上好！」",
+          "textEn": "Say loudly: 'Good morning, teacher!'",
           "traits": {
             "外向": 3,
             "礼貌": 2,
             "表达": 2
           },
-          "next": "i2"
+          "next": "i1a"
         },
         {
           "id": "opt-2",
-          "text": "小声说'早上好'",
-          "textEn": "Say quietly 'Good morning'",
+          "text": "挥手微笑回应",
+          "textEn": "Wave and smile in response",
           "traits": {
-            "内向": 2,
-            "礼貌": 1,
-            "害羞": 1
+            "外向": 2,
+            "礼貌": 2,
+            "友善": 2
           },
           "next": "i2"
         },
         {
           "id": "opt-3",
-          "text": "只是点点头",
-          "textEn": "Just nod",
+          "text": "有点害羞，只是点点头",
+          "textEn": "A bit shy, just nod",
           "traits": {
             "内向": 2,
+            "害羞": 2,
             "谨慎": 1
           },
           "next": "i2"
         }
       ]
+    },
+    {
+      "id": "i1a",
+      "type": "narrative",
+      "image": "loud_greeting.png",
+      "description": [
+        "你大声向老师打招呼：「老师早上好」，声音像早晨的阳光一样明亮。",
+        "长颈鹿老师笑着回应：「早上好，你的声音真有力量」",
+        "她的笑容让空气都变得温暖。"
+      ],
+      "descriptionEn": [
+        "You greet the teacher loudly: \"Good morning, teacher!\", your voice as bright as the morning sun.",
+        "The giraffe teacher smiles and responds: \"Good morning, your voice is so powerful!\"",
+        "Her smile makes the air feel warm and happy."
+      ],
+      "next": "i1b"
+    },
+    {
+      "id": "i1b",
+      "type": "narrative",
+      "image": "enter_together.png",
+      "description": [
+        "老师轻轻牵着你的手，向校园里走去。",
+        "她的声音在阳光下轻轻回荡：「一起进去吧。」",
+        "你笑着回答：「Okay!」"
+      ],
+      "descriptionEn": [
+        "The teacher gently takes your hand and walks toward the campus.",
+        "Her voice gently echoes in the sunlight: \"Let's go in together.\"",
+        "You smile and reply: \"Okay!\""
+      ],
+      "next": "i2"
     },
     {
       "id": "i2",

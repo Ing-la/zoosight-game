@@ -1,0 +1,263 @@
+.narrative-scene-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.narrative-scene-background {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.narrative-scene-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.narrative-scene-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(102, 126, 234, 0.1);
+  border: 2px solid #667eea;
+  color: #667eea;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.narrative-scene-back-button:hover {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.narrative-scene-progress {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.narrative-scene-main-content {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  align-items: stretch;
+  min-height: 500px;
+}
+
+.narrative-scene-image-container {
+  flex: 3;
+  min-width: 0;
+  min-height: 500px;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.narrative-scene-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.narrative-scene-image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  border: 2px dashed #667eea;
+  border-radius: 15px;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.placeholder-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.narrative-scene-right-panel {
+  flex: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+.narrative-scene-description {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.description-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.description-text-chinese {
+  font-size: 1.3rem;
+  color: #333;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.description-text-english {
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.narrative-scene-continue-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.narrative-continue-button {
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: white;
+  font-family: inherit;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+  min-width: 150px;
+}
+
+.narrative-continue-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.narrative-continue-button:active {
+  transform: translateY(0);
+}
+
+.continue-text-chinese {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.continue-text-english {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .narrative-scene-main-content {
+    flex-direction: column;
+    min-height: unset;
+  }
+  
+  .narrative-scene-image-container,
+  .narrative-scene-right-panel {
+    height: auto;
+    min-height: unset;
+  }
+  
+  .narrative-scene-image-container {
+    width: 100%;
+    max-width: 100%;
+    min-height: 300px;
+  }
+  
+  .narrative-scene-right-panel {
+    width: 100%;
+  }
+  
+  .narrative-scene-description {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .narrative-scene-content {
+    padding: 1.5rem;
+  }
+  
+  .narrative-scene-image-placeholder {
+    min-height: 250px;
+  }
+  
+  .description-text-chinese {
+    font-size: 1.1rem;
+  }
+  
+  .description-text-english {
+    font-size: 0.9rem;
+  }
+  
+  .narrative-continue-button {
+    padding: 1rem 2rem;
+    min-width: 120px;
+  }
+}
+

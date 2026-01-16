@@ -8,7 +8,8 @@
     "start": "npm run build && electron .",
     "dev": "npm run start",
     "build:electron": "electron-builder",
-    "pack": "electron-builder --dir"
+    "pack": "electron-builder --dir",
+    "copy-images": "node scripts/copy-images.js"
   },
   "keywords": [
     "electron",
