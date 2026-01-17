@@ -48,5 +48,5 @@ coverage/
 # 调试
 .vscode/launch.json
 
-# 备份图片目录（不需要上传到GitHub）
-picture-backup/
+# Electron 构建工具缓存
+electron-cache/

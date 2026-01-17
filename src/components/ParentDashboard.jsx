@@ -43,7 +43,7 @@ function ParentDashboard() {
 
     // 获取当前使用的模型名称
     const config = getApiConfig();
-    let modelName = null;
+    let modelName = '模拟数据';
     if (config && config.apiKey) {
       switch (config.model) {
         case 'gemini':
@@ -186,7 +186,7 @@ function ParentDashboard() {
                         disabled={loading}
                       >
                         {loading && selectedUser === user.nickname 
-                          ? (loadingModel ? `正在调用 ${loadingModel} 分析...` : '正在使用模拟数据生成报告...')
+                          ? (loadingModel ? `正在调用 ${loadingModel} 分析...` : '生成中...')
                           : '生成报告'}
                       </button>
                       <button
@@ -206,15 +206,6 @@ function ParentDashboard() {
           {report && selectedUser && (
             <div className="report-section">
               <h2>📊 {selectedUser} 的分析报告</h2>
-              {report.modelDisplayName && (
-                <div className="report-model-info">
-                  <span className="model-badge">
-                    {report.modelDisplayName.includes('模拟数据') 
-                      ? `📝 ${report.modelDisplayName}` 
-                      : `🤖 使用 ${report.modelDisplayName} 生成`}
-                  </span>
-                </div>
-              )}
               <div className="report-content">
                 <div className="report-item">
                   <h3>性格分析</h3>

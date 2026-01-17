@@ -1,389 +1,380 @@
-# 🎬 开发新场景指南
+# 🎬 新场景开发指南
 
-本指南将详细介绍如何为 ZooSight Game 添加新的游戏场景。
+## 📋 目录
 
-## 📋 前置知识
+- [场景系统概述](#场景系统概述)
+- [开发新场景步骤](#开发新场景步骤)
+- [配置文件格式](#配置文件格式)
+- [资源管理](#资源管理)
+- [场景注册](#场景注册)
+- [最佳实践](#最佳实践)
 
-在开始之前，建议先了解：
-- [项目介绍](./project-introduction.md) - 了解项目架构
-- [游戏内容介绍](./game-content.md) - 了解游戏机制
-- [开发指南](./development-guide.md) - 了解开发环境
+## 🎯 场景系统概述
 
-## 🎯 场景系统架构
+ZooSight Game 采用**模块化场景架构**，每个场景（地点）都有独立的目录，包含：
 
-### 目录结构
+- **场景配置** (`config.json`) - 定义场景的对话、选项等
+- **资源文件** (`assets/`) - 场景的图片、音效等资源
 
-每个场景遵循以下目录结构：
+### 场景结构
 
 ```
 src/scenes/
-  {locationId}/              # 场景（地点）目录，如 school
-    {eventId}/              # 事件目录，如 entrance
-      config.json           # 场景配置文件（必需）
-      assets/               # 资源目录（可选）
-        images/             # 图片资源
-        sounds/             # 音效资源
-      README.md            # 场景说明（可选）
+├── school/              # 学校场景（地点）
+│   ├── entrance/        # 进校门事件
+│   │   ├── config.json  # 场景配置
+│   │   └── assets/      # 资源目录
+│   │       ├── images/  # 图片资源
+│   │       └── sounds/  # 音效资源
+│   └── lunch/           # 午餐时间事件
+│
+└── playground/          # 游乐场场景（地点）
+    ├── slide/          # 滑滑梯事件
+    └── swing/           # 荡秋千事件
 ```
 
-### 命名规范
+## 🚀 开发新场景步骤
 
-- **locationId**: 小写字母，使用连字符分隔（如：`school`, `playground`）
-- **eventId**: 小写字母，使用连字符分隔（如：`entrance`, `lunch`）
-- **场景ID**: 格式为 `{locationId}-{eventId}`（如：`school-entrance`）
+### 步骤 1：创建场景目录
 
-## 🚀 开发步骤
-
-### 步骤 1: 创建场景目录
-
-#### 情况 A: 地点已存在
-
-如果地点（如 `school`）已存在，直接在该目录下创建事件目录：
+如果场景（地点）已存在，直接在该目录下创建事件目录：
 
 ```bash
-mkdir -p src/scenes/school/new-event
+src/scenes/school/new-event/
 ```
 
-#### 情况 B: 地点不存在
-
-如果地点不存在，先创建地点目录，再创建事件目录：
+如果场景（地点）不存在，先创建场景目录：
 
 ```bash
-mkdir -p src/scenes/new-location/new-event
+src/scenes/new-location/
+  new-event/
+    config.json
+    assets/
+      images/
+      sounds/
 ```
 
-### 步骤 2: 创建配置文件
+### 步骤 2：创建配置文件
 
-在事件目录下创建 `config.json` 文件：
+在事件目录下创建 `config.json`，格式如下：
 
 ```json
 {
-  "id": "new-event",
-  "name": "新事件",
-  "icon": "🎯",
-  "description": "这是一个新事件的描述",
+  "id": "entrance",
+  "name": "进校门",
+  "icon": "🚪",
+  "description": "早上来到学校门口",
   "locationId": "school",
-  "eventId": "new-event",
+  "eventId": "entrance",
   "interactions": [
-    {
-      "id": "i0",
-      "type": "narrative",
-      "description": [
-        "这是场景开始的描述文字。",
-        "可以有多行描述。"
-      ],
-      "next": "i1"
-    },
     {
       "id": "i1",
       "character": "teacher",
-      "characterName": "老师",
-      "dialogue": "老师：你好，小朋友！",
+      "characterName": "长颈鹿老师",
+      "dialogue": "老师：早上好呀，小同学～今天看起来精神不错呀！",
+      "dialogueEn": "Teacher: Good morning, little student! You look energetic today!",
       "image": "teacher_greeting.png",
       "options": [
         {
           "id": "opt-1",
-          "text": "大声说：老师好！",
+          "text": "大声说：「老师早上好！」",
+          "textEn": "Say loudly: 'Good morning, teacher!'",
           "traits": {
             "外向": 3,
             "礼貌": 2,
             "表达": 2
           },
-          "next": "i2"
+          "next": "i1a"
         },
         {
           "id": "opt-2",
-          "text": "害羞地点头",
+          "text": "挥手微笑回应",
+          "textEn": "Wave and smile in response",
           "traits": {
-            "内向": 2,
-            "礼貌": 1
+            "外向": 2,
+            "礼貌": 2,
+            "友善": 2
           },
-          "next": "i2"
+          "next": "i1c"
         }
       ]
-    },
-    {
-      "id": "i2",
-      "type": "narrative",
-      "description": [
-        "场景结束了。"
-      ],
-      "next": null
     }
   ]
 }
 ```
 
-### 步骤 3: 配置字段说明
-
-#### 顶层字段
-
-| 字段 | 类型 | 必需 | 说明 |
-|------|------|------|------|
-| `id` | string | ✅ | 事件ID（与 eventId 相同） |
-| `name` | string | ✅ | 场景显示名称 |
-| `icon` | string | ✅ | 场景图标（emoji） |
-| `description` | string | ✅ | 场景描述 |
-| `locationId` | string | ✅ | 地点ID（必须与目录名一致） |
-| `eventId` | string | ✅ | 事件ID（必须与目录名一致） |
-| `interactions` | array | ✅ | 交互节点数组 |
-
-#### interaction 字段
-
-| 字段 | 类型 | 必需 | 说明 |
-|------|------|------|------|
-| `id` | string | ✅ | 交互ID（唯一） |
-| `type` | string | ❌ | 交互类型：`narrative`（叙述）或 `dialogue`（对话，默认） |
-| `character` | string | ❌ | 角色类型：`teacher`、`classmate`、`security` 等 |
-| `characterName` | string | ❌ | 角色显示名称 |
-| `dialogue` | string | ❌ | 对话内容 |
-| `description` | array | ❌ | 叙述内容（当 type 为 narrative 时） |
-| `image` | string | ❌ | 图片文件名（相对于 assets/images/） |
-| `options` | array | ❌ | 选项数组（对话类型必需） |
-| `next` | string/null | ✅ | 下一个交互ID（null 表示结束） |
-
-#### option 字段
-
-| 字段 | 类型 | 必需 | 说明 |
-|------|------|------|------|
-| `id` | string | ✅ | 选项ID（唯一） |
-| `text` | string | ✅ | 选项文本 |
-| `traits` | object | ✅ | 性格特征得分对象 |
-| `next` | string/null | ✅ | 下一个交互ID |
-
-#### traits 对象
-
-性格特征得分，支持的特征：
-- `外向` / `内向`
-- `独立` / `依赖`
-- `规则意识`
-- `社交`
-- `沟通`
-- `礼貌`
-- `友善`
-- `创新`
-- `耐心`
-- `表达`
-
-得分范围：建议 1-5 分
-
-### 步骤 4: 添加资源（可选）
+### 步骤 3：添加资源（可选）
 
 如果需要图片或音效：
 
-1. **创建资源目录**
-   ```bash
-   mkdir -p src/scenes/school/new-event/assets/images
-   mkdir -p src/scenes/school/new-event/assets/sounds
-   ```
+1. 在事件目录下创建 `assets/images/` 或 `assets/sounds/`
+2. 将资源文件放入对应目录
+3. 在 `config.json` 中使用相对路径引用（如 `"image": "teacher_greeting.png"`）
 
-2. **添加资源文件**
-   - 将图片放入 `assets/images/` 目录
-   - 将音效放入 `assets/sounds/` 目录
-
-3. **在配置中引用**
-   ```json
-   {
-     "image": "character.png"
-   }
-   ```
-
-### 步骤 5: 注册场景
-
-在 `src/scenes/scenes-index.js` 中注册场景：
-
-1. **导入场景配置**
-   ```javascript
-   import newEvent from './school/new-event/config.json';
-   ```
-
-2. **添加到场景配置映射**
-   ```javascript
-   const sceneConfigs = {
-     'school-entrance': schoolEntrance,
-     'school-lunch': schoolLunch,
-     'school-new-event': newEvent,  // 新增
-     // ...
-   };
-   ```
-
-3. **如果地点是新的，添加地点元数据**
-   ```javascript
-   const locationMetadata = {
-     school: {
-       id: 'school',
-       name: '学校',
-       icon: '🏫',
-       description: '在学校里会发生什么有趣的事情呢？'
-     },
-     'new-location': {  // 新增
-       id: 'new-location',
-       name: '新地点',
-       icon: '📍',
-       description: '新地点的描述'
-     }
-   };
-   ```
-
-### 步骤 6: 测试场景
-
-1. **启动开发服务器**
-   ```bash
-   npm run dev
-   ```
-
-2. **测试场景**
-   - 选择新场景
-   - 测试所有交互节点
-   - 检查选项是否正确
-   - 验证性格特征得分
-
-3. **检查资源**
-   - 确保图片正常显示
-   - 确保音效正常播放（如果添加了）
-
-## 📝 完整示例
-
-### 示例：添加"图书馆"场景
-
-#### 1. 创建目录结构
-
-```bash
-mkdir -p src/scenes/library/reading/assets/images
-```
-
-#### 2. 创建配置文件
-
-`src/scenes/library/reading/config.json`:
-
-```json
-{
-  "id": "reading",
-  "name": "图书馆阅读",
-  "icon": "📚",
-  "description": "在图书馆里安静地阅读",
-  "locationId": "library",
-  "eventId": "reading",
-  "interactions": [
-    {
-      "id": "i0",
-      "type": "narrative",
-      "description": [
-        "你走进了安静的图书馆，",
-        "书架上摆满了各种各样的书籍。"
-      ],
-      "next": "i1"
-    },
-    {
-      "id": "i1",
-      "character": "librarian",
-      "characterName": "图书管理员",
-      "dialogue": "管理员：小朋友，你想看什么书呢？",
-      "image": "librarian.png",
-      "options": [
-        {
-          "id": "opt-1",
-          "text": "大声说：我想看故事书！",
-          "traits": {
-            "外向": 3,
-            "表达": 2
-          },
-          "next": "i2"
-        },
-        {
-          "id": "opt-2",
-          "text": "小声说：故事书...",
-          "traits": {
-            "内向": 2,
-            "礼貌": 2
-          },
-          "next": "i2"
-        }
-      ]
-    },
-    {
-      "id": "i2",
-      "type": "narrative",
-      "description": [
-        "你找到了一本有趣的故事书，",
-        "开始安静地阅读起来。"
-      ],
-      "next": null
-    }
-  ]
-}
-```
-
-#### 3. 注册场景
+### 步骤 4：注册场景
 
 在 `src/scenes/scenes-index.js` 中：
 
+1. 导入场景配置：
 ```javascript
-import libraryReading from './library/reading/config.json';
+import newEvent from './new-location/new-event/config.json';
+```
 
+2. 添加到 `sceneConfigs` 对象：
+```javascript
 const sceneConfigs = {
   // ... 其他场景
-  'library-reading': libraryReading,
+  'new-location-new-event': newEvent
 };
+```
 
+3. 如果地点是新的，在 `locationMetadata` 中添加地点信息：
+```javascript
 const locationMetadata = {
   // ... 其他地点
-  library: {
-    id: 'library',
-    name: '图书馆',
-    icon: '📚',
-    description: '在图书馆里安静地阅读'
+  'new-location': {
+    id: 'new-location',
+    name: '新地点',
+    icon: '🏠',
+    description: '新地点的描述'
   }
 };
 ```
 
-## ✅ 检查清单
+### 步骤 5：完成！
 
-开发新场景时，请确保：
+无需修改其他代码，系统会自动识别新场景。
 
-- [ ] 目录结构正确
-- [ ] `config.json` 格式正确
-- [ ] 所有必需字段都已填写
-- [ ] 交互节点 ID 唯一且连续
-- [ ] 选项的 `next` 字段指向正确的交互节点
-- [ ] 最后一个交互节点的 `next` 为 `null`
-- [ ] 性格特征得分合理（1-5 分）
-- [ ] 场景已在 `scenes-index.js` 中注册
-- [ ] 资源文件（如果有）路径正确
-- [ ] 测试通过，场景可以正常游玩
+## 📝 配置文件格式
+
+### 必需字段
+
+- `id`: 事件ID（与 eventId 相同）
+- `name`: 场景名称（中文）
+- `icon`: 场景图标（emoji）
+- `description`: 场景描述（中文）
+- `locationId`: 地点ID（必须与目录名一致）
+- `eventId`: 事件ID（必须与目录名一致）
+- `interactions`: 对话交互数组
+
+### interactions 字段
+
+#### 对话类型（dialogue）
+
+```json
+{
+  "id": "i1",
+  "character": "teacher",
+  "characterName": "长颈鹿老师",
+  "dialogue": "老师：早上好呀，小同学～",
+  "dialogueEn": "Teacher: Good morning, little student!",
+  "image": "teacher_greeting.png",
+  "options": [...]
+}
+```
+
+字段说明：
+- `id`: 交互ID（唯一）
+- `character`: 角色类型（teacher/classmate/security等）
+- `characterName`: 角色显示名称
+- `dialogue`: 对话内容（中文）
+- `dialogueEn`: 对话内容（英文，可选）
+- `image`: 图片文件名（相对于 assets/images/）
+- `options`: 选项数组
+
+#### 叙述类型（narrative）
+
+```json
+{
+  "id": "i1a",
+  "type": "narrative",
+  "image": "loud_greeting.png",
+  "description": [
+    "你大声向老师打招呼：「老师早上好」，声音像早晨的阳光一样明亮。",
+    "长颈鹿老师笑着回应：「早上好，你的声音真有力量」"
+  ],
+  "descriptionEn": [
+    "You greet the teacher loudly: \"Good morning, teacher!\"",
+    "The giraffe teacher smiles and responds: \"Good morning!\""
+  ],
+  "next": "i1b"
+}
+```
+
+字段说明：
+- `type`: 必须为 `"narrative"`
+- `description`: 叙述内容数组（中文）
+- `descriptionEn`: 叙述内容数组（英文，可选）
+- `image`: 图片文件名（可选）
+- `next`: 下一个交互ID
+
+### options 字段
+
+```json
+{
+  "id": "opt-1",
+  "text": "大声说：「老师早上好！」",
+  "textEn": "Say loudly: 'Good morning, teacher!'",
+  "traits": {
+    "外向": 3,
+    "礼貌": 2,
+    "表达": 2
+  },
+  "next": "i1a"
+}
+```
+
+字段说明：
+- `id`: 选项ID（唯一）
+- `text`: 选项文本（中文）
+- `textEn`: 选项文本（英文，可选）
+- `traits`: 性格特征对象（键为特征名，值为权重 1-5）
+- `next`: 选择后跳转的交互ID
+
+### 性格特征（traits）
+
+可用的性格特征包括：
+
+- **外向/内向**：社交倾向
+- **理性/感性**：决策方式
+- **计划/灵活**：生活方式
+- **判断/感知**：信息处理
+- **礼貌**：礼貌程度
+- **表达**：表达能力
+- **友善**：友善程度
+- **害羞**：害羞程度
+- **勇敢**：勇敢程度
+- **谨慎**：谨慎程度
+
+权重范围：1-5（1=轻微，5=强烈）
+
+## 🎨 资源管理
+
+### 图片资源
+
+- **位置**：`{eventDir}/assets/images/`
+- **格式**：PNG、JPG（推荐 PNG）
+- **命名**：使用英文和下划线，如 `teacher_greeting.png`
+- **尺寸**：建议 800x600 或更高分辨率
+
+### 音效资源（计划中）
+
+- **位置**：`{eventDir}/assets/sounds/`
+- **格式**：MP3、OGG
+- **命名**：使用英文和下划线
+
+### 资源路径
+
+在代码中使用 `sceneLoader.getAssetPath()` 获取资源路径：
+
+```javascript
+const imagePath = sceneLoader.getAssetPath(
+  'school',      // locationId
+  'entrance',    // eventId
+  'images/teacher_greeting.png'  // 资源路径
+);
+```
+
+## 📚 场景注册
+
+### scenes-index.js 结构
+
+```javascript
+// 导入场景配置
+import schoolEntrance from './school/entrance/config.json';
+import schoolLunch from './school/lunch/config.json';
+// ... 其他场景
+
+// 场景配置对象
+const sceneConfigs = {
+  'school-entrance': schoolEntrance,
+  'school-lunch': schoolLunch,
+  // ... 其他场景
+};
+
+// 地点元数据
+const locationMetadata = {
+  school: {
+    id: 'school',
+    name: '学校',
+    icon: '🏫',
+    description: '在学校里会发生什么有趣的事情呢？'
+  },
+  // ... 其他地点
+};
+
+// 导出函数
+export function getSceneConfig(locationId, eventId) {
+  const key = `${locationId}-${eventId}`;
+  return sceneConfigs[key];
+}
+
+export function getLocations() {
+  return Object.values(locationMetadata);
+}
+```
+
+## ✨ 最佳实践
+
+### 1. 场景设计
+
+- **清晰的流程**：确保交互流程清晰，不会让用户困惑
+- **合理的选项**：提供 2-4 个选项，避免过多或过少
+- **有趣的描述**：使用生动的描述，符合"疯狂动物城"主题
+
+### 2. 角色设计
+
+- **一致性**：保持角色性格的一致性
+- **多样性**：使用不同的动物角色，增加趣味性
+- **符合主题**：角色设计符合"疯狂动物城"风格
+
+### 3. 性格特征
+
+- **平衡性**：确保选项能够反映不同的性格特征
+- **权重合理**：权重值应该合理（1-5）
+- **覆盖全面**：尽量覆盖主要的性格维度
+
+### 4. 资源管理
+
+- **命名规范**：使用英文和下划线命名资源文件
+- **文件大小**：控制图片文件大小，避免过大
+- **格式统一**：使用统一的图片格式（推荐 PNG）
+
+### 5. 测试
+
+- **功能测试**：确保场景能够正常加载和运行
+- **流程测试**：测试所有选项路径
+- **资源测试**：确保所有资源能够正确加载
 
 ## 🐛 常见问题
 
-### 场景不显示
+### 场景无法加载
 
-- 检查是否在 `scenes-index.js` 中正确注册
-- 检查 `locationId` 和 `eventId` 是否正确
-- 检查场景 ID 格式是否为 `{locationId}-{eventId}`
+- 检查 `config.json` 格式是否正确
+- 检查 `locationId` 和 `eventId` 是否与目录名一致
+- 检查场景是否已正确注册
 
-### 交互节点不连续
+### 资源无法显示
 
-- 确保每个交互节点的 `next` 字段指向存在的节点
-- 确保最后一个节点的 `next` 为 `null`
+- 检查资源文件是否存在
+- 检查资源路径是否正确
+- 检查资源文件名是否与配置一致
 
-### 图片不显示
+### 选项无法跳转
 
-- 检查图片路径是否正确
-- 确保图片文件存在于 `assets/images/` 目录
-- 检查图片文件名是否与配置中的一致
+- 检查 `next` 字段是否指向正确的交互ID
+- 检查交互ID是否存在
+- 检查交互流程是否有循环或死路
 
-### 性格特征不生效
+## 📖 参考示例
 
-- 检查 `traits` 对象格式是否正确
-- 确保特征名称使用中文
-- 检查得分是否为数字
+参考现有场景：
 
-## 📚 相关文档
-
-- [项目介绍](./project-introduction.md)
-- [开发指南](./development-guide.md)
-- [游戏内容介绍](./game-content.md)
+- `src/scenes/school/entrance/` - 进校门场景（完整示例）
+- `src/scenes/school/lunch/` - 午餐时间场景
+- `src/scenes/playground/slide/` - 滑滑梯场景
 
 ---
 
-**返回**: [文档索引](./README.md)
+**开始创建你的第一个场景吧！** 🎬
 
