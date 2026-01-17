@@ -5,7 +5,7 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 版本号遵循 [Semantic Versioning](https://semver.org/lang/zh-CN/)。
 
-## [1.0.0] - 2024-XX-XX
+## [1.0.0] - 2024-01-17
 
 ### 新增
 - 🎮 基础游戏功能：场景选择和事件交互
@@ -16,6 +16,12 @@
 - 🔧 多 AI 模型支持（Google Gemini、智谱 AI、通义千问）
 - 🎨 儿童友好的 UI 设计
 - 💾 本地数据存储功能
+- 📚 完整的文档系统（docs/ 目录）
+
+### 改进
+- ✨ 优化大模型调用状态显示，明确显示使用的模型或模拟数据
+- 🗑️ 清理废弃代码（删除 `src/api/gemini.js`）
+- 📝 完善文档结构，创建详细的开发指南
 
 ### 技术栈
 - Electron 27
@@ -35,8 +41,3 @@
 - 优化 UI/UX
 - 添加多语言支持
 - 添加音效和背景音乐
-
-
-
-
-

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generateReport } from '../api/ai';
+import { getApiConfig } from '../utils/storage';
 import useGameStore from '../store/gameStore';
 import '../styles/Report.css';
 
@@ -8,6 +9,7 @@ function Report() {
   const navigate = useNavigate();
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingModel, setLoadingModel] = useState(null);
   const [error, setError] = useState(null);
   
   const getAllChoices = useGameStore((state) => state.getAllChoices);
@@ -25,6 +27,26 @@ function Report() {
       return;
     }
     
+    // 获取当前使用的模型名称
+    const config = getApiConfig();
+    let modelName = null;
+    if (config && config.apiKey) {
+      switch (config.model) {
+        case 'gemini':
+          modelName = 'Google Gemini';
+          break;
+        case 'zhipu':
+          modelName = '智谱 AI (GLM)';
+          break;
+        case 'tongyi':
+          modelName = '通义千问 (Qwen)';
+          break;
+        default:
+          modelName = 'AI 模型';
+      }
+    }
+    setLoadingModel(modelName);
+    
     // 准备发送给 API 的数据（包含选择和特征）
     const dataForAPI = {
       choices: userChoices,
@@ -36,11 +58,13 @@ function Report() {
       .then(data => {
         setReport(data);
         setLoading(false);
+        setLoadingModel(null);
       })
       .catch(error => {
         console.error('生成报告失败:', error);
         setError('报告生成失败：' + (error.message || '未知错误'));
         setLoading(false);
+        setLoadingModel(null);
       });
   }, [getAllChoices, calculateTraits]);
 
@@ -51,7 +75,11 @@ function Report() {
   if (loading) {
     return (
       <div className="report-container">
-        <div className="loading">正在生成分析报告...</div>
+        <div className="loading">
+          {loadingModel 
+            ? `正在调用 ${loadingModel} 分析...` 
+            : '正在使用模拟数据生成报告...'}
+        </div>
       </div>
     );
   }
@@ -62,6 +90,15 @@ function Report() {
         <h1 className="report-title">🎉 游戏完成！</h1>
         {report ? (
           <div className="report-body">
+            {report.modelDisplayName && (
+              <div className="report-model-info">
+                <span className="model-badge">
+                  {report.modelDisplayName.includes('模拟数据') 
+                    ? `📝 ${report.modelDisplayName}` 
+                    : `🤖 使用 ${report.modelDisplayName} 生成`}
+                </span>
+              </div>
+            )}
             <div className="report-section">
               <h2>性格分析</h2>
               <p>{report.personality}</p>
