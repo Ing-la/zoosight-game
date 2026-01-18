@@ -1,20 +1,135 @@
 # 🎮 ZooSight Game
 
-> 一个基于 Electron + React 开发的桌面端儿童情景游戏，通过情景互动帮助分析儿童性格特征，并提供专业的 MBTI 性格分析和职业发展建议。
+一个基于 Electron + React 开发的桌面端儿童情景游戏，以**疯狂动物城（Zootopia）**为设计灵感，通过动物角色的互动场景帮助分析儿童性格特征，并提供 MBTI 性格分析和职业发展建议。
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
+在这个充满动物角色的世界里，孩子们会遇到🦒长颈鹿老师、🐘大象保安、🦊狐狸同学等有趣的角色，通过在不同场景中的选择，系统会分析他们的性格特征，并生成个性化的报告。
 
 ## ✨ 功能特点
 
+- 🦁 **疯狂动物城主题** - 以 Zootopia 为背景，充满趣味性的动物角色设计
 - 🎮 **情景互动游戏** - 通过选择探索不同场景（学校、游乐场等）
-- 👥 **多用户系统** - 支持儿童账号和家长账号分离管理
+- 🦒 **丰富的动物角色** - 长颈鹿老师、大象保安、狐狸同学等可爱角色
+- 👥 **多用户系统** - 支持儿童账号和家长账号分离
 - 📊 **性格分析报告** - 基于用户选择数据生成详细的性格分析报告
 - 🧠 **MBTI 性格类型分析** - 专业的 MBTI 性格类型推断
 - 💼 **职业发展建议** - 结合当前经济背景的职业建议
 - 🎨 **儿童友好的 UI 设计** - 简洁美观的界面设计
 - 🔒 **数据隐私保护** - 所有数据存储在本地，不上传服务器
 - 🤖 **多 AI 模型支持** - 支持 Google Gemini、智谱 AI、通义千问
+
+## 🛠️ 技术栈
+
+- **Electron** - 桌面应用框架
+- **React 18** - UI 框架
+- **Vite** - 构建工具
+- **React Router** - 路由管理
+- **Zustand** - 状态管理
+- **Google Gemini API** / **智谱 AI** / **通义千问** - AI 分析
+
+## 📁 项目结构
+
+```
+my-child-game/
+├── main.js                 # Electron 主进程
+├── preload.js              # 预加载脚本
+├── index.html              # HTML 入口文件
+├── vite.config.js          # Vite 配置
+├── package.json            # 项目配置
+├── .gitignore             # Git 忽略文件
+├── README.md               # 项目说明文档
+├── LICENSE                 # 许可证
+│
+├── src/                    # 源代码
+│   ├── api/                # API 调用
+│   │   ├── ai.js           # AI 接口封装
+│   │   └── ai.js           # AI 接口封装（支持多种模型）
+│   │
+│   ├── components/         # React 组件
+│   │   ├── HomePage.jsx    # 主页
+│   │   ├── Login.jsx        # 登录页面
+│   │   ├── LocationSelect.jsx  # 场景选择
+│   │   ├── EventSelect.jsx     # 事件选择
+│   │   ├── GameScene.jsx       # 游戏场景（核心组件）
+│   │   ├── SceneComplete.jsx  # 场景完成
+│   │   ├── ParentDashboard.jsx # 家长面板
+│   │   ├── Report.jsx         # 报告展示
+│   │   └── ConfigModal.jsx    # API 配置弹窗
+│   │
+│   ├── scenes/             # 场景系统（核心）
+│   │   ├── core/           # 核心系统
+│   │   │   ├── SceneLoader.js      # 场景加载器
+│   │   │   ├── SceneRegistry.js    # 场景注册表
+│   │   │   └── README.md           # 接口规范
+│   │   │
+│   │   ├── school/         # 学校场景
+│   │   │   ├── entrance/   # 进校门事件
+│   │   │   │   ├── config.json     # 场景配置
+│   │   │   │   ├── assets/         # 资源目录
+│   │   │   │   │   ├── images/     # 图片资源
+│   │   │   │   │   └── sounds/     # 音效资源
+│   │   │   │   └── README.md
+│   │   │   ├── lunch/      # 午餐时间事件
+│   │   │   │   ├── config.json
+│   │   │   │   ├── assets/
+│   │   │   │   └── README.md
+│   │   │   └── README.md
+│   │   │
+│   │   ├── playground/      # 游乐场场景
+│   │   │   ├── slide/      # 滑滑梯事件
+│   │   │   ├── swing/      # 荡秋千事件
+│   │   │   └── README.md
+│   │   │
+│   │   ├── assets/         # 应用资源
+│   │   │   └── icons/      # 应用图标
+│   │   │
+│   │   ├── handlers/       # 场景处理器
+│   │   │   └── DialogueHandler.js
+│   │   │
+│   │   ├── types/          # 场景类型组件
+│   │   │   └── DialogueScene.jsx
+│   │   │
+│   │   ├── scenes-index.js # 场景索引文件
+│   │   └── README.md       # 场景系统说明
+│   │
+│   ├── styles/             # 样式文件
+│   │   ├── global.css      # 全局样式
+│   │   ├── GameScene.css   # 游戏场景样式
+│   │   ├── DialogueScene.css  # 对话场景样式
+│   │   ├── NarrativeScene.css  # 叙述场景样式
+│   │   └── ...             # 其他组件样式
+│   │
+│   ├── utils/              # 工具函数
+│   │   ├── userStorage.js  # 用户数据存储
+│   │   └── storage.js      # 通用存储工具
+│   │
+│   ├── store/              # 状态管理
+│   │   └── gameStore.js    # 游戏状态
+│   │
+│   ├── App.jsx             # 主组件
+│   └── index.jsx           # 入口文件
+│
+└── dist/                   # 构建输出（不提交到 Git）
+└── out/                    # 打包输出（不提交到 Git）
+```
+
+## 🎯 场景系统架构
+
+项目采用**模块化场景架构**，所有场景配置都位于 `src/scenes/` 目录下。每个场景（地点）都有独立的目录，包含：
+- **场景配置** (`config.json`) - 定义场景的对话、选项等
+- **资源文件** (`assets/`) - 场景的图片、音效等资源
+
+**注意**：项目已完全迁移到新的场景系统，所有场景配置都在 `src/scenes/` 目录中管理。
+
+### 添加新场景
+
+1. 在 `src/scenes/` 下创建场景目录（如 `school/`）或使用现有场景目录
+2. 在场景目录下创建事件目录（如 `school/new-event/`）
+3. 创建 `config.json` 配置文件
+4. 如需资源，创建 `assets/images/` 和 `assets/sounds/` 目录
+5. 在 `src/scenes/scenes-index.js` 中注册场景
+6. 完成！
+
+详细说明请参考 `src/scenes/README.md`
 
 ## 🚀 快速开始
 
@@ -23,22 +138,13 @@
 - Node.js >= 16.0.0
 - npm >= 7.0.0
 
-### 安装步骤
-
-1. **克隆项目**
-
-```bash
-git clone https://github.com/Ing-la/zoosight-game.git
-cd zoosight-game
-```
-
-2. **安装依赖**
+### 安装依赖
 
 ```bash
 npm install
 ```
 
-3. **开发运行**
+### 开发运行
 
 ```bash
 npm run dev
@@ -58,6 +164,29 @@ npm run build:electron
 
 打包后的文件将输出到 `out/` 目录。
 
+## ⚙️ 配置
+
+### API 配置
+
+应用支持三种 AI 模型：
+
+1. **Google Gemini** - 默认推荐
+2. **智谱 AI** (Zhipu)
+3. **通义千问** (Tongyi Qianwen)
+
+在应用内通过"家长面板" -> "API 配置"进行设置，输入对应的 API Key。
+
+**注意**：API Key 存储在本地，不会上传到任何服务器。
+
+### 环境变量（可选）
+
+如果需要通过环境变量配置，可以创建 `.env` 文件：
+
+```env
+# Google Gemini API Key（可选，也可以在应用内配置）
+VITE_GEMINI_API_KEY=your_api_key_here
+```
+
 ## 📖 使用说明
 
 ### 儿童用户
@@ -66,8 +195,9 @@ npm run build:electron
 2. 注册或登录账号（昵称 + 密码）
 3. 选择场景（学校、游乐场等）
 4. 选择事件（进校门、午餐等）
-5. 根据情景提示做出选择
-6. 完成所有交互后，场景完成
+5. 在动物城里与🦒长颈鹿老师、🐘大象保安、🦊狐狸同学等角色互动
+6. 根据情景提示做出选择
+7. 完成所有交互后，场景完成
 
 ### 家长用户
 
@@ -79,61 +209,12 @@ npm run build:electron
    - 点击"生成报告"查看 AI 分析结果
    - 配置 API Key（首次使用需要）
 
-## ⚙️ API 配置
-
-应用支持三种 AI 模型：
-
-1. **Google Gemini** - 默认推荐（免费）
-2. **智谱 AI (GLM)** - 国产大语言模型
-3. **通义千问 (Qwen)** - 阿里云的大语言模型
-
-在应用内通过"家长面板" -> "API 配置"进行设置，输入对应的 API Key。
-
-**注意**：
-- API Key 存储在本地，不会上传到任何服务器
-- 如果不配置 API Key，将使用模拟数据生成报告
-- 详细配置说明请参考 [API 配置文档](docs/api-configuration.md)
-
-## 📁 项目结构
-
-```
-zoosight-game/
-├── src/                    # 源代码
-│   ├── api/               # API 调用
-│   ├── components/        # React 组件
-│   ├── scenes/            # 场景系统（核心）
-│   ├── store/             # 状态管理
-│   └── utils/             # 工具函数
-├── docs/                  # 详细文档
-└── README.md              # 本文件
-```
-
-## 📚 文档
-
-详细的文档请查看 [docs](./docs/) 目录：
-
-- [📖 文档索引](./docs/README.md) - 文档导航
-- [🎯 项目介绍](./docs/project-introduction.md) - 项目架构和设计理念
-- [🎮 游戏内容介绍](./docs/game-content.md) - 游戏场景和机制
-- [🛠️ 开发指南](./docs/development-guide.md) - 开发环境搭建和代码结构
-- [🎬 开发新场景指南](./docs/scene-development-guide.md) - 详细的新场景开发步骤
-- [⚙️ API 配置说明](./docs/api-configuration.md) - API 配置和使用
-
-## 🛠️ 技术栈
-
-- **Electron** - 桌面应用框架
-- **React 18** - UI 框架
-- **Vite** - 构建工具
-- **React Router** - 路由管理
-- **Zustand** - 状态管理
-- **Google Gemini API** / **智谱 AI** / **通义千问** - AI 分析
-
 ## 🔒 数据隐私
 
-- ✅ 所有用户数据存储在本地（使用 localStorage）
-- ✅ 不会上传任何数据到服务器
-- ✅ API Key 仅用于调用 AI 服务生成报告
-- ✅ 建议定期备份用户数据
+- 所有用户数据存储在本地（使用 localStorage）
+- 不会上传任何数据到服务器
+- API Key 仅用于调用 AI 服务生成报告
+- 建议定期备份用户数据
 
 ## 🐛 问题排查
 
@@ -154,6 +235,7 @@ zoosight-game/
 
 - 确保场景资源文件存在于 `src/scenes/{locationId}/{eventId}/assets/` 目录
 - 检查资源路径是否正确
+- 使用 `sceneLoader.getAssetPath()` 获取正确的资源路径
 
 ## 🤝 贡献
 
@@ -165,6 +247,17 @@ zoosight-game/
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 开启 Pull Request
 
+仓库地址：https://github.com/Ing-la/zoosight-game
+
+## 📝 开发计划
+
+- [ ] 添加更多场景和事件
+- [ ] 支持自定义场景配置
+- [ ] 添加数据导出功能
+- [ ] 优化 UI/UX
+- [ ] 添加多语言支持
+- [ ] 添加音效和背景音乐
+
 ## 📄 许可证
 
 本项目采用 [MIT](LICENSE) 许可证。
@@ -175,11 +268,25 @@ zoosight-game/
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 - [Google Gemini](https://ai.google.dev/)
+- **疯狂动物城（Zootopia）** - 设计灵感来源
+
+## 📚 详细文档
+
+更多详细信息请查看 [docs/](./docs/) 目录：
+
+- [项目介绍](./docs/project-introduction.md) - 项目概述和设计理念
+- [游戏内容](./docs/game-content.md) - 场景、角色、玩法介绍
+- [开发指南](./docs/development-guide.md) - 环境搭建和开发说明
+- [新场景开发](./docs/scene-development-guide.md) - 如何添加新场景
+- [API 配置](./docs/api-configuration.md) - AI 模型配置说明
+- [故障排查](./docs/troubleshooting.md) - 常见问题解决方案
 
 ## 📧 联系方式
 
-如有问题或建议，请提交 [Issue](https://github.com/Ing-la/zoosight-game/issues)。
+如有问题或建议，请提交 Issue。
 
 ---
+
+**让我们一起在动物城里探索和成长！** 🦁🦒🦊🐘
 
 **注意**：本项目仅供学习和研究使用。使用 AI 生成的分析报告仅供参考，不应作为专业心理评估的依据。

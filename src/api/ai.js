@@ -196,25 +196,9 @@ async function callTongyiAPI(apiKey, prompt) {
 }
 
 /**
- * 获取模型显示名称
- */
-function getModelDisplayName(model) {
-  switch (model) {
-    case 'gemini':
-      return 'Google Gemini';
-    case 'zhipu':
-      return '智谱 AI (GLM)';
-    case 'tongyi':
-      return '通义千问 (Qwen)';
-    default:
-      return 'AI 模型';
-  }
-}
-
-/**
  * 基于用户选择生成分析报告
  * @param {Array} userChoices - 用户的选择数据
- * @returns {Promise<Object>} 包含性格分析、MBTI、职业建议的报告对象，以及使用的模型信息
+ * @returns {Promise<Object>} 包含性格分析、MBTI、职业建议的报告对象
  */
 export async function generateReport(userChoices) {
   // 获取 API 配置
@@ -224,16 +208,10 @@ export async function generateReport(userChoices) {
   if (!config || !config.apiKey) {
     console.warn('⚠️ 未配置 API Key，使用模拟报告数据');
     await new Promise(resolve => setTimeout(resolve, 1000));
-    const report = generateMockReport(userChoices);
-    return {
-      ...report,
-      modelUsed: 'mock',
-      modelDisplayName: '模拟数据'
-    };
+    return generateMockReport(userChoices);
   }
 
   const prompt = buildPrompt(userChoices);
-  const modelDisplayName = getModelDisplayName(config.model);
 
   try {
     let text;
@@ -256,21 +234,11 @@ export async function generateReport(userChoices) {
       throw new Error('API 返回为空');
     }
 
-    const report = parseReport(text);
-    return {
-      ...report,
-      modelUsed: config.model,
-      modelDisplayName: modelDisplayName
-    };
+    return parseReport(text);
   } catch (error) {
     console.error(`${config.model} API 调用失败:`, error);
     console.warn('⚠️ API 调用失败，使用模拟报告数据');
-    const report = generateMockReport(userChoices);
-    return {
-      ...report,
-      modelUsed: 'mock',
-      modelDisplayName: '模拟数据（API调用失败）'
-    };
+    return generateMockReport(userChoices);
   }
 }
 

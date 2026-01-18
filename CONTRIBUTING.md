@@ -2,14 +2,6 @@
 
 感谢您对本项目的关注！我们欢迎所有形式的贡献。
 
-## 📚 文档导航
-
-在开始贡献之前，建议先阅读以下文档：
-
-- [项目介绍](docs/project-introduction.md) - 了解项目架构和设计理念
-- [开发指南](docs/development-guide.md) - 开发环境搭建和代码结构
-- [开发新场景指南](docs/scene-development-guide.md) - 详细的新场景开发步骤
-
 ## 如何贡献
 
 ### 报告问题
@@ -55,39 +47,34 @@
 
 ### 开发流程
 
-1. **克隆项目**
+1. 克隆项目：
    ```bash
    git clone https://github.com/Ing-la/zoosight-game.git
    cd zoosight-game
    ```
 
-2. **安装依赖**
+2. 安装依赖：
    ```bash
    npm install
    ```
 
-3. **运行开发环境**
+3. 运行开发环境：
    ```bash
    npm run dev
    ```
 
-4. **进行更改并测试**
+4. 进行更改并测试
 
-5. **确保代码可以正常构建**
+5. 确保代码可以正常构建：
    ```bash
    npm run build
    ```
 
-## 常见贡献场景
-
 ### 添加新场景
 
-添加新场景请参考 [开发新场景指南](docs/scene-development-guide.md)，这是最详细的指南。
-
-简要步骤：
-1. 在 `src/scenes/` 下创建场景目录
-2. 创建 `config.json` 配置文件
-3. 在 `src/scenes/scenes-index.js` 中注册场景
+1. 编辑 `src/data/locations.json`
+2. 添加新的 location 或 event
+3. 确保 interactions 结构正确
 4. 测试新场景是否正常工作
 
 ### 添加新的 AI 模型支持
@@ -95,35 +82,14 @@
 1. 在 `src/api/ai.js` 中添加新的 API 调用函数
 2. 在 `src/components/ConfigModal.jsx` 中添加模型选项
 3. 更新 `generateReport` 函数以支持新模型
-4. 更新 `getModelDisplayName` 函数以添加显示名称
-5. 更新 [API 配置文档](docs/api-configuration.md)
-
-### 修复 Bug
-
-1. 创建 Issue 描述问题（如果还没有）
-2. Fork 项目并创建修复分支
-3. 编写修复代码和测试
-4. 提交 Pull Request，引用相关 Issue
-
-### 改进文档
-
-文档位于 `docs/` 目录，欢迎改进：
-- 修正错误
-- 补充缺失内容
-- 改进可读性
-- 添加示例
-
-## 代码审查
-
-提交 Pull Request 后，项目维护者会进行代码审查。请：
-- 及时回复审查意见
-- 根据反馈进行修改
-- 保持友好的沟通
+4. 更新文档
 
 ## 问题反馈
 
 如有任何问题，请通过以下方式联系：
 
 - 提交 [Issue](https://github.com/Ing-la/zoosight-game/issues)
+- 发送邮件（如果有）
 
 感谢您的贡献！🎉
+
