@@ -50,3 +50,6 @@ coverage/
 
 # Electron 构建工具缓存
 electron-cache/
+
+# 图片备份目录
+picture-backup/
