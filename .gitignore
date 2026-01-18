@@ -50,3 +50,6 @@ coverage/
 
 # 备份图片目录（不需要上传到GitHub）
 picture-backup/
+
+# 脚本目录
+scripts/
