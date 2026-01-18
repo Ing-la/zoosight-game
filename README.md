@@ -42,17 +42,18 @@ my-child-game/
 ├── src/                    # 源代码
 │   ├── api/                # API 调用
 │   │   ├── ai.js           # AI 接口封装
-│   │   └── gemini.js       # Gemini API（已废弃）
+│   │   └── ai.js           # AI 接口封装（支持多种模型）
 │   │
 │   ├── components/         # React 组件
 │   │   ├── HomePage.jsx    # 主页
 │   │   ├── Login.jsx        # 登录页面
 │   │   ├── LocationSelect.jsx  # 场景选择
 │   │   ├── EventSelect.jsx     # 事件选择
-│   │   ├── GameScene.jsx       # 游戏场景
+│   │   ├── GameScene.jsx       # 游戏场景（核心组件）
 │   │   ├── SceneComplete.jsx  # 场景完成
 │   │   ├── ParentDashboard.jsx # 家长面板
-│   │   └── ...
+│   │   ├── Report.jsx         # 报告展示
+│   │   └── ConfigModal.jsx    # API 配置弹窗
 │   │
 │   ├── scenes/             # 场景系统（核心）
 │   │   ├── core/           # 核心系统
@@ -92,7 +93,10 @@ my-child-game/
 │   │
 │   ├── styles/             # 样式文件
 │   │   ├── global.css      # 全局样式
-│   │   └── ...
+│   │   ├── GameScene.css   # 游戏场景样式
+│   │   ├── DialogueScene.css  # 对话场景样式
+│   │   ├── NarrativeScene.css  # 叙述场景样式
+│   │   └── ...             # 其他组件样式
 │   │
 │   ├── utils/              # 工具函数
 │   │   ├── userStorage.js  # 用户数据存储
@@ -110,9 +114,11 @@ my-child-game/
 
 ## 🎯 场景系统架构
 
-项目采用**模块化场景架构**，每个场景（地点）都有独立的目录，包含：
+项目采用**模块化场景架构**，所有场景配置都位于 `src/scenes/` 目录下。每个场景（地点）都有独立的目录，包含：
 - **场景配置** (`config.json`) - 定义场景的对话、选项等
 - **资源文件** (`assets/`) - 场景的图片、音效等资源
+
+**注意**：项目已完全迁移到新的场景系统，所有场景配置都在 `src/scenes/` 目录中管理。
 
 ### 添加新场景
 

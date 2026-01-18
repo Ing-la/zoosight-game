@@ -60,7 +60,8 @@ zoosight-game/
 │   │   ├── Login.jsx        # 登录组件
 │   │   ├── LocationSelect.jsx  # 场景选择组件
 │   │   ├── EventSelect.jsx     # 事件选择组件
-│   │   ├── GameScene.jsx       # 游戏场景组件
+│   │   ├── GameScene.jsx       # 游戏场景组件（核心）
+│   │   ├── SceneComplete.jsx   # 场景完成组件
 │   │   ├── ParentDashboard.jsx  # 家长面板组件
 │   │   ├── Report.jsx          # 报告展示组件
 │   │   └── ConfigModal.jsx     # API 配置弹窗
@@ -152,6 +153,8 @@ git push origin feature/new-feature
 ### 修改场景
 
 场景修改请参考 [新场景开发指南](./scene-development-guide.md)
+
+**注意**：所有场景配置都在 `src/scenes/` 目录下，使用模块化的场景系统。旧的 `src/data/` 目录和相关的旧组件已被移除。
 
 ### 修改样式
 
@@ -311,4 +314,5 @@ npm run build:electron
 ---
 
 **Happy Coding!** 🎉
+
 
