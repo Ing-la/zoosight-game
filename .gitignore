@@ -53,3 +53,6 @@ electron-cache/
 
 # 图片备份目录
 picture-backup/
+
+# 脚本目录
+scripts/
