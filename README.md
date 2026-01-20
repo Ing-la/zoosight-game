@@ -17,6 +17,24 @@
 - 🔒 **数据隐私保护** - 所有数据存储在本地，不上传服务器
 - 🤖 **多 AI 模型支持** - 支持 Google Gemini、智谱 AI、通义千问
 
+## 📥 下载安装
+
+### Windows 版本
+
+- **[下载最新版本 (v1.0.0)](https://github.com/Ing-la/zoosight-game/releases/download/v1.0.0/ZoosightGame.zip)** (130 MB)
+- 解压后直接运行 `儿童情景游戏.exe` 即可
+- 无需安装 Node.js 或其他依赖
+
+### 系统要求
+
+- Windows 10 或更高版本
+
+### 其他版本
+
+请访问 [Releases 页面](https://github.com/Ing-la/zoosight-game/releases) 查看所有版本和更新日志。
+
+**注意**：首次使用需要在"家长面板"中配置 AI API Key（支持 Google Gemini、智谱 AI、通义千问）。所有数据存储在本地，不会上传到服务器。
+
 ## 🛠️ 技术栈
 
 - **Electron** - 桌面应用框架
